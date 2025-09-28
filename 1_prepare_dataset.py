@@ -1,3 +1,6 @@
+import schnetpack
+print("schnetpack type:", type(schnetpack))
+print("schnetpack location:", getattr(schnetpack, '__file__', 'builtin'))
 import torch
 from torch_geometric.datasets import QM9
 import random

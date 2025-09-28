@@ -1,4 +1,5 @@
 import torch
+torch.set_default_dtype(torch.float32)
 import torch.nn as nn
 import torch.optim as optim
 from torch_geometric.loader import DataLoader
@@ -6,13 +7,15 @@ from torch_geometric.data import Data
 import os
 import traceback
 import sys
-from models.surrogate import Surrogate
+from models.surrogate import model
 
 # --- Configuration ---
-# CRITICAL: Ensure precision matches the rest of the project
-DTYPE = torch.float64
-torch.set_default_dtype(DTYPE)
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# Keep float32 as the default for library compatibility
+torch.set_default_dtype(torch.float32) 
+
+# Use float64 for your model's specific needs
+DTYPE = torch.float64 
+DEVICE = torch.device('cuda')
 
 DATA_PATH = 'data/qm9_micro_enriched.pt'
 MODEL_SAVE_PATH = 'models/surrogate_frozen.pt'
@@ -103,8 +106,9 @@ def test_model_forward(model, sample_data):
     """Test if the model can perform a forward pass."""
     try:
         model.eval()
+        print("model eval")
         with torch.no_grad():
-            output = model(sample_data.to(DEVICE))
+            output = model.forward(sample_data.to(DEVICE))
         print(f"✓ Model forward pass successful. Output shape: {output.shape}")
         return True
     except Exception as e:
@@ -120,7 +124,7 @@ if not os.path.exists(DATA_PATH):
     sys.exit(1)
 
 try:
-    enriched_dataset_dicts = torch.load(DATA_PATH, map_location='cpu')
+    enriched_dataset_dicts = torch.load(DATA_PATH, map_location='cuda')
     print(f"✓ Successfully loaded {len(enriched_dataset_dicts)} entries")
 except Exception as e:
     print(f"✗ Failed to load dataset: {str(e)}")
@@ -172,17 +176,18 @@ try:
 except Exception as e:
     print(f"✗ Failed to create DataLoader: {str(e)}")
     sys.exit(1)
-
 # --- Model, Optimizer, and Loss ---
 print("Initializing model...")
 try:
-    model = Surrogate().to(DEVICE)
-    print(f"✓ Model loaded successfully on {DEVICE}")
+    # Initialize the model first (it will be float32 by default)
+    model = model
     
-    # Count parameters
-    total_params = sum(p.numel() for p in model.parameters())
-    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    print(f"Model parameters - Total: {total_params:,}, Trainable: {trainable_params:,}")
+    # THEN, convert all its parameters and buffers to your desired DTYPE
+    model = model.to(dtype=DTYPE, device=DEVICE) 
+    
+    print(f"✓ Model loaded successfully on {DEVICE} with dtype={next(model.parameters()).dtype}")
+    
+    # ... rest of the code
     
 except Exception as e:
     print(f"✗ Failed to initialize model: {str(e)}")
@@ -191,6 +196,7 @@ except Exception as e:
 
 # Test model with sample data
 if dataset_list:
+    print("dataset:", dataset_list[0])
     if not test_model_forward(model, dataset_list[0]):
         print("Model forward pass failed. Please check your model implementation.")
         sys.exit(1)
