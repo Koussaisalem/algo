@@ -107,7 +107,7 @@ for t in range(T, 0, -1):
 
     # g. ASSERT:
     assert error < tolerance, f"Orthonormality error {error} exceeded tolerance {tolerance} at step {t}"
-
+    print(error)
     # h. Update U_t for the next iteration
     U_t = U_t_minus_1
 

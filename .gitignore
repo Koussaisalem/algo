@@ -40,3 +40,7 @@ Thumbs.db
 *.pt
 *.pth
 *.bin
+
+# Dataset files
+data/
+results/
