@@ -1,0 +1,23 @@
+{
+  "summary": {
+    "count": 5,
+    "manifold_fro_error_mean": 1.863547218842255,
+    "euclidean_fro_error_mean": 2.3955175825316197,
+    "manifold_orth_error_mean": 6.3213269613615375e-16,
+    "euclidean_orth_error_mean": 3.7949448277116895,
+    "manifold_alignment_mean": 0.4207505517803952,
+    "euclidean_alignment_mean": 0.5746241699838457,
+    "manifold_time_ms_mean": 2.6145183997869026,
+    "euclidean_time_ms_mean": 0.658997600839939
+  },
+  "config": {
+    "num_samples": 5,
+    "num_steps": 20,
+    "noise_scale": 0.1,
+    "eta": 0.05,
+    "tau": 0.02,
+    "gamma": 0.0,
+    "seed": 1234,
+    "dataset_path": "data/qm9_micro_5k_enriched.pt"
+  }
+}

@@ -1,0 +1,202 @@
+[
+  {
+    "index": 96,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 171,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 175,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 183,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 186,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 196,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 332,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 352,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 406,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 419,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 444,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 451,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 466,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 479,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 495,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 504,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 519,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 727,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 743,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 774,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 803,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 816,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 837,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 861,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 867,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 882,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 957,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1056,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1093,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1366,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1425,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1442,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1604,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1646,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 1909,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2046,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2069,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2073,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2153,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2211,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2293,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2369,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2422,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2581,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2608,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2635,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2685,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2751,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 2995,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  },
+  {
+    "index": 3376,
+    "error": "Single point calculation failed:\n-2- xtb_calculator_singlepoint: Electronic structure method terminated\n-1- scf: Self consistent charge iterator did not converge"
+  }
+]

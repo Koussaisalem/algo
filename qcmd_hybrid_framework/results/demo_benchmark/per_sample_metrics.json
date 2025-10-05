@@ -1,0 +1,62 @@
+[
+  {
+    "index": 572,
+    "rank": 3,
+    "manifold_fro_error": 1.9554017873138156,
+    "euclidean_fro_error": 2.2874066687933405,
+    "manifold_orth_error": 5.95574112655773e-16,
+    "euclidean_orth_error": 3.295426560054876,
+    "manifold_alignment": 0.3627339750283225,
+    "euclidean_alignment": 0.5535110966492438,
+    "manifold_time_ms": 4.686932999902638,
+    "euclidean_time_ms": 0.7400329996016808
+  },
+  {
+    "index": 3144,
+    "rank": 3,
+    "manifold_fro_error": 1.8446115150081117,
+    "euclidean_fro_error": 2.6196465844032795,
+    "manifold_orth_error": 2.5669218574461575e-16,
+    "euclidean_orth_error": 5.033123816055744,
+    "manifold_alignment": 0.4329013931165799,
+    "euclidean_alignment": 0.650473923793886,
+    "manifold_time_ms": 2.192856998590287,
+    "euclidean_time_ms": 0.6253880019357894
+  },
+  {
+    "index": 216,
+    "rank": 3,
+    "manifold_fro_error": 1.8496472232868282,
+    "euclidean_fro_error": 2.3627686212149626,
+    "manifold_orth_error": 1.0382579049630133e-15,
+    "euclidean_orth_error": 3.390883353796732,
+    "manifold_alignment": 0.42980085823122105,
+    "euclidean_alignment": 0.5384021059242703,
+    "manifold_time_ms": 1.9414380003581755,
+    "euclidean_time_ms": 0.57125800231006
+  },
+  {
+    "index": 3082,
+    "rank": 3,
+    "manifold_fro_error": 1.7972164837027407,
+    "euclidean_fro_error": 2.2776223732464747,
+    "manifold_orth_error": 9.310795971437161e-16,
+    "euclidean_orth_error": 3.4791109841195835,
+    "manifold_alignment": 0.46166881845119273,
+    "euclidean_alignment": 0.6128618772013944,
+    "manifold_time_ms": 2.132754998456221,
+    "euclidean_time_ms": 0.5787619993498083
+  },
+  {
+    "index": 642,
+    "rank": 3,
+    "manifold_fro_error": 1.8708590848997797,
+    "euclidean_fro_error": 2.430143665000042,
+    "manifold_orth_error": 3.3905968017365086e-16,
+    "euclidean_orth_error": 3.776179424531512,
+    "manifold_alignment": 0.4166477140746598,
+    "euclidean_alignment": 0.517871846350434,
+    "manifold_time_ms": 2.118609001627192,
+    "euclidean_time_ms": 0.7795470010023564
+  }
+]
