@@ -41,6 +41,8 @@ Thumbs.db
 *.pth
 *.bin
 
-# Dataset files
-data/
-results/
+# Local datasets and cache artifacts
+qcmd_hybrid_framework/data/
+qcmd_hybrid_framework/models/surrogate/
+qcmd_hybrid_framework/data/qm9/raw/gdb9.sdf
+qcmd_hybrid_framework/data/qm9_micro_5k_enriched.pt.bak

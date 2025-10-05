@@ -1,34 +1,20 @@
-# Core deep learning and graph neural network dependencies
-torch>=2.0.0
-torch-geometric>=2.3.0
+# Locked dependency versions that mirror the dev container
 
-# Quantum chemistry and molecular modeling
-schnetpack>=2.0.0
-rdkit>=2023.03.1
-xtb>=22.1
+# Core tensor + GNN stack
+torch==2.5.1+cpu
+torch-geometric==2.6.1
+nequip==0.15.0
 
-# Scientific computing
-numpy>=1.24.0
+# Chemistry + numerical tooling
+rdkit==2025.3.6
+numpy==1.26.4
 
 # Testing
-pytest>=7.0.0
+pytest==8.4.2
 
-# Optional: For better performance and CUDA support
-# Uncomment the following if you need CUDA support:
+# Optional tooling (install manually if needed)
+# xtb-python  # QM driver used during dataset enrichment; available via conda-forge
 # torch-cluster
-# torch-scatter  
+# torch-scatter
 # torch-sparse
 # torch-spline-conv
-
-# Development dependencies (optional)
-# jupyter>=1.0.0
-# matplotlib>=3.6.0
-# seaborn>=0.12.0
-# pandas>=1.5.0
-
-# Note: Some packages like xtb may require conda installation for full compatibility:
-# conda install -c conda-forge xtb-python
-
-# IMPORTANT: There may be compatibility issues between SchNetPack 2.0+ and PyTorch 2.8+
-# If you encounter import errors with SchNetPack, consider downgrading PyTorch:
-# pip install torch==2.1.0 torch-geometric==2.4.0
