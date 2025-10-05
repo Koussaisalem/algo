@@ -46,3 +46,30 @@ qcmd_hybrid_framework/data/
 qcmd_hybrid_framework/models/surrogate/
 qcmd_hybrid_framework/data/qm9/raw/gdb9.sdf
 qcmd_hybrid_framework/data/qm9_micro_5k_enriched.pt.bak
+# Large data files
+*.sdf
+*.bak
+*.pt
+qcmd_hybrid_framework/data/qm9/raw/
+qcmd_hybrid_framework/data/*.bak
+EOF
+qcmd_hybrid_framework/data/*.sdf
+qcmd_hybrid_framework/data/*.pt # Large data files
+qcmd_hybrid_framework/data/*.bin # Large binary files
+qcmd_hybrid_framework/data/*.csv # Large CSV files
+qcmd_hybrid_framework/data/*.h5 # Large HDF5 files
+qcmd_hybrid_framework/data/*.npz # Large NumPy compressed files
+qcmd_hybrid_framework/data/*.tar.gz # Compressed archive files
+qcmd_hybrid_framework/data/*.zip # Compressed archive files
+qcmd_hybrid_framework/data/*.json # Large JSON files
+qcmd_hybrid_framework/data/*.xml # Large XML files
+qcmd_hybrid_framework/data/*.log # Log files
+qcmd_hybrid_framework/data/*.db # Database files
+qcmd_hybrid_framework/data/*.sqlite # SQLite database files
+qcmd_hybrid_framework/data/*.hdf5 # HDF5 files
+qcmd_hybrid_framework/data/*.npz # NumPy compressed files
+qcmd_hybrid_framework/data/*.tar # Tar archive files
+qcmd_hybrid_framework/data/*.7z # 7-Zip compressed files
+
+# Ignore any other large files in the data directory
+qcmd_hybrid_framework/data/*
