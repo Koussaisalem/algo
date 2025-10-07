@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CMD-ECS Generated Molecules</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        h1 { color: #333; }
+        .config { background: #fff; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .molecule { background: #fff; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .molecule h3 { margin-top: 0; color: #2c3e50; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .stat { padding: 10px; background: #ecf0f1; border-radius: 3px; }
+        .stat-label { font-weight: bold; color: #7f8c8d; font-size: 0.9em; }
+        .stat-value { font-size: 1.2em; color: #2c3e50; }
+        .gamma-info { background: #e8f5e9; padding: 10px; border-left: 4px solid #4caf50; margin: 10px 0; }
+        .warning { background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🧪 CMD-ECS Generated Molecules</h1>
+    
+    <div class="config">
+        <h2>Generation Configuration</h2>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Molecules Generated</div>
+                <div class="stat-value">20</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Diffusion Steps</div>
+                <div class="stat-value">50</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Initial Noise (σ)</div>
+                <div class="stat-value">0.300</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Step Size (η)</div>
+                <div class="stat-value">0.030</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Noise Scale (τ)</div>
+                <div class="stat-value">0.010</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Energy Weight (γ)</div>
+                <div class="stat-value">0.150</div>
+            </div>
+        </div>
+        
+        <div class="gamma-info">✓ <strong>MAECS Active:</strong> Energy-based guidance is enabled with γ=0.15</div>
+    </div>
+    
+    <h2>Generated Molecules</h2>
+
+    <div class="molecule">
+        <h3>Molecule 1</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">757</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">13</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">12.25</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.26s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_001_initial.xyz, molecule_001_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 2</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">1706</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">17</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-117.82</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.24s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_002_initial.xyz, molecule_002_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 3</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">860</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">19</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">39.91</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.38s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_003_initial.xyz, molecule_003_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 4</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">1114</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">15</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-82.73</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.19s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_004_initial.xyz, molecule_004_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 5</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2595</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">13</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-21.31</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.06s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_005_initial.xyz, molecule_005_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 6</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">17</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">23</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">516.10</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.71s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_006_initial.xyz, molecule_006_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 7</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2518</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">15</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-60.04</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.26s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_007_initial.xyz, molecule_007_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 8</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">1381</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">16</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-3.24</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.14s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_008_initial.xyz, molecule_008_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 9</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2732</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">12</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-50.69</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.11s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_009_initial.xyz, molecule_009_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 10</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">3287</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">21</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-23.70</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.55s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_010_initial.xyz, molecule_010_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 11</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2613</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">18</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-58.64</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.26s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_011_initial.xyz, molecule_011_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 12</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">1266</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">9</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-60.20</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">0.94s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_012_initial.xyz, molecule_012_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 13</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2306</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">15</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-67.24</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.15s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_013_initial.xyz, molecule_013_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 14</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">3410</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">19</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">67.52</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.51s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_014_initial.xyz, molecule_014_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 15</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2660</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">16</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-109.90</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.11s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_015_initial.xyz, molecule_015_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 16</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">1774</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">15</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-188.28</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.24s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_016_initial.xyz, molecule_016_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 17</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">638</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">13</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-60.45</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.08s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_017_initial.xyz, molecule_017_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 18</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">3233</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">19</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">240.59</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.31s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_018_initial.xyz, molecule_018_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 19</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2050</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">17</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">151.29</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.31s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_019_initial.xyz, molecule_019_final.xyz</p>
+    </div>
+
+    <div class="molecule">
+        <h3>Molecule 20</h3>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Template Index</div>
+                <div class="stat-value">2926</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Atoms</div>
+                <div class="stat-value">14</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Final Energy (eV)</div>
+                <div class="stat-value">-128.40</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Generation Time</div>
+                <div class="stat-value">1.22s</div>
+            </div>
+        </div>
+        <p><strong>Files:</strong> molecule_020_initial.xyz, molecule_020_final.xyz</p>
+    </div>
+
+    <div class="config">
+        <h2>Summary Statistics</h2>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Average Energy</div>
+                <div class="stat-value">-0.25 eV</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Avg Generation Time</div>
+                <div class="stat-value">1.25s</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Total Time</div>
+                <div class="stat-value">25.02s</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="config">
+        <h2>Notes</h2>
+        <ul>
+            <li>XYZ files can be visualized with tools like PyMOL, VMD, or online viewers</li>
+            <li>Initial structures are the noisy starting points; final structures are after diffusion</li>
+            <li>Energy values from the trained NequIP surrogate model</li>
+            <li>All coordinates in Ångströms, energies in eV</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

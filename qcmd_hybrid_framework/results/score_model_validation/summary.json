@@ -1,0 +1,46 @@
+{
+  "summary": {
+    "cmd_ecs": {
+      "fro_error": 2.974283573187417,
+      "orth_error": 5.564582082773449e-16,
+      "alignment": -0.47778319640432043,
+      "rmsd": 2.5612405951130364,
+      "energy": 19.710398180681448,
+      "energy_abs_error": 92.67838385750684,
+      "runtime_ms": 5.461717406266331,
+      "count": 64
+    },
+    "euclidean": {
+      "fro_error": 7.495691188668339,
+      "orth_error": 36.256124268442264,
+      "alignment": 0.22707377863740144,
+      "rmsd": 15.158224008520012,
+      "energy": -5.421424323349458,
+      "energy_abs_error": 60.50035256617287,
+      "runtime_ms": 1.4934149843668365,
+      "count": 64
+    },
+    "euclid_retract": {
+      "fro_error": 2.1453961288811385,
+      "orth_error": 5.425302538011455e-16,
+      "alignment": 0.2252133789075186,
+      "rmsd": 2.735266798899196,
+      "energy": 27.549127210518275,
+      "energy_abs_error": 102.24956290755972,
+      "runtime_ms": 0.05027784374789235,
+      "count": 64
+    }
+  },
+  "config": {
+    "num_samples": 64,
+    "num_steps": 40,
+    "noise_scale": 0.2,
+    "eta": 0.04,
+    "tau": 0.015,
+    "gamma": 0.15,
+    "seed": 2025,
+    "dataset_path": "data/qm9_micro_5k_enriched.pt",
+    "surrogate_path": "models/surrogate/surrogate_state_dict.pt"
+  },
+  "winner": "cmd_ecs"
+}

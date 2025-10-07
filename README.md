@@ -77,7 +77,29 @@ python scripts/03_train_surrogate.py \
 The default target is the xTB energy in eV (`energy_ev`). Switch to Hartree supervision
 with `--target energy_hartree` if you prefer to postpone the unit conversion.
 
-### 4. Advanced CMD-ECS vs Euclidean benchmarking
+### 4. Train the score model
+
+`04_train_score_model.py` trains a NequIP-based neural network to predict
+score functions (directions toward the data manifold) from noisy samples.
+The model learns to denoise manifold frames using multiple noise scales
+for robust generalization.
+
+```bash
+cd /workspaces/algo/qcmd_hybrid_framework
+python scripts/04_train_score_model.py \
+  --dataset-path data/qm9_micro_5k_enriched.pt \
+  --output-dir models/score_model \
+  --epochs 100 \
+  --batch-size 16 \
+  --lr 5e-4 \
+  --noise-levels 0.1 0.2 0.3 0.5
+```
+
+The trained weights are saved to `models/score_model/score_model_state_dict.pt`
+along with training metrics. This replaces the oracle score used in earlier
+benchmarks with a learned neural predictor.
+
+### 5. Advanced CMD-ECS vs Euclidean benchmarking
 
 `05_advanced_benchmark.py` replays the reverse-diffusion process with three
 strategies—true CMD-ECS updates, an unconstrained Euclidean walk, and a
@@ -91,13 +113,43 @@ python scripts/05_advanced_benchmark.py \
   --num-samples 128 \
   --num-steps 40 \
   --noise-scale 0.2 \
+  --gamma 0.1 \
   --surrogate-path models/surrogate/surrogate_state_dict.pt \
   --output-dir results/advanced_benchmark
 ```
 
+Setting `--gamma 0.1` activates MAECS (energy-guided diffusion). Use `--gamma 0.0`
+to test pure manifold diffusion without energy steering.
+
 Artifacts include per-sample metrics, a summary JSON, and a Markdown report
 (`results/advanced_benchmark/report.md`) that names the winning method (currently
 CMD-ECS) and highlights where Euclidean baselines fail.
+
+### 6. Generate novel molecules
+
+`06_generate_molecules.py` implements full CMD-ECS inference to generate
+molecular geometries from scratch. It uses the trained score and surrogate
+models to perform reverse diffusion, optionally with energy-based guidance.
+
+```bash
+cd /workspaces/algo/qcmd_hybrid_framework
+python scripts/06_generate_molecules.py \
+  --num-samples 20 \
+  --num-steps 50 \
+  --noise-scale 0.3 \
+  --gamma 0.1 \
+  --score-model-path models/score_model/score_model_state_dict.pt \
+  --surrogate-path models/surrogate/surrogate_state_dict.pt \
+  --output-dir results/generated_molecules
+```
+
+The script generates:
+- XYZ files for initial and final molecular geometries
+- An HTML visualization report with statistics
+- Energy predictions from the surrogate model
+
+Use `--gamma > 0` to enable MAECS energy steering, which biases generation
+toward low-energy configurations.
 
 ## Customising training data
 
@@ -167,11 +219,19 @@ inference for CMD-ECS.
 
 ## Next steps
 
-This README will stay the blueprint as the architecture evolves. Planned work includes:
+This README will stay the blueprint as the architecture evolves. Completed features:
 
-- Training the score model to replace oracle gradients in benchmarking and inference.
-- Exploring schedule sweeps and alternative noise regimes for CMD-ECS.
-- Expanding benchmarks with larger datasets and additional Euclidean baselines.
+- ✅ Training the score model to replace oracle gradients in benchmarking and inference
+- ✅ Full molecule generation pipeline with XYZ export and HTML visualization
+- ✅ MAECS energy-guided diffusion with configurable gamma parameter
+
+Future work includes:
+
+- Scaling to larger datasets (10k, 50k molecules) for improved model accuracy
+- Advanced score model architectures (SE(3)-equivariant, attention mechanisms)
+- Exploring schedule sweeps and alternative noise regimes for CMD-ECS
+- Expanding benchmarks with additional baselines and molecular property prediction
+- Integration with molecular docking and optimization workflows
 
 Every new stage will ship with a script under `scripts/` and an accompanying
 documentation update here.
