@@ -26,50 +26,118 @@ venv.bak/
 .vscode/
 .idea/
 
-# Logs and databases
-*.log
-*.sqlite
-*.db
-
 # OS generated files
 .DS_Store
 .Trashes
 Thumbs.db
 
-# PyTorch specific
+# ============================================================================
+# COMPUTATIONAL ARTIFACTS - Temporary/Large Files
+# ============================================================================
+
+# Logs (except important summary logs)
+*.log
+!*_results.log
+!*_summary.log
+
+# Database files
+*.sqlite
+*.db
+
+# ASE trajectory files (can be large, regenerate from structures)
+*.traj
+!*_final.traj  # Keep final optimized trajectories
+
+# GPAW temporary outputs
+gpaw-restart-*.gpw
+gpaw-*.txt
+gpaw_output.txt
+
+# xTB temporary files
+xtb_*.log
+.xtboptok
+xtbrestart
+xtbtopo.mol
+charges
+wbo
+xtb.out
+
+# Vibrations calculations (can regenerate)
+qcmd_hybrid_framework/vibrations_xtb/vib/
+*.mode
+*.pckl
+
+# ============================================================================
+# PYTORCH & ML MODELS
+# ============================================================================
+
+# Large model checkpoints (>100MB)
 *.pt
 *.pth
 *.bin
+*.ckpt
 
-# Local datasets and cache artifacts
-qcmd_hybrid_framework/data/
-qcmd_hybrid_framework/models/surrogate/
-qcmd_hybrid_framework/data/qm9/raw/gdb9.sdf
-qcmd_hybrid_framework/data/qm9_micro_5k_enriched.pt.bak
-# Large data files
-*.sdf
-*.bak
-*.pt
+# Keep small config/metadata files
+!*_config.json
+!*_metadata.json
+
+# ============================================================================
+# DATA DIRECTORIES
+# ============================================================================
+
+# Raw/processed datasets (large, regenerate or download)
 qcmd_hybrid_framework/data/qm9/raw/
-qcmd_hybrid_framework/data/*.bak
-EOF
+qcmd_hybrid_framework/data/qm9/processed/
 qcmd_hybrid_framework/data/*.sdf
-qcmd_hybrid_framework/data/*.pt # Large data files
-qcmd_hybrid_framework/data/*.bin # Large binary files
-qcmd_hybrid_framework/data/*.csv # Large CSV files
-qcmd_hybrid_framework/data/*.h5 # Large HDF5 files
-qcmd_hybrid_framework/data/*.npz # Large NumPy compressed files
-qcmd_hybrid_framework/data/*.tar.gz # Compressed archive files
-qcmd_hybrid_framework/data/*.zip # Compressed archive files
-qcmd_hybrid_framework/data/*.json # Large JSON files
-qcmd_hybrid_framework/data/*.xml # Large XML files
-qcmd_hybrid_framework/data/*.log # Log files
-qcmd_hybrid_framework/data/*.db # Database files
-qcmd_hybrid_framework/data/*.sqlite # SQLite database files
-qcmd_hybrid_framework/data/*.hdf5 # HDF5 files
-qcmd_hybrid_framework/data/*.npz # NumPy compressed files
-qcmd_hybrid_framework/data/*.tar # Tar archive files
-qcmd_hybrid_framework/data/*.7z # 7-Zip compressed files
+qcmd_hybrid_framework/data/*.pt
+qcmd_hybrid_framework/data/*.bak
+qcmd_hybrid_framework/data/*.h5
+qcmd_hybrid_framework/data/*.hdf5
+qcmd_hybrid_framework/data/*.npz
+qcmd_hybrid_framework/data/*.tar.gz
+qcmd_hybrid_framework/data/*.zip
 
-# Ignore any other large files in the data directory
-qcmd_hybrid_framework/data/*
+# Generated structures (keep small JSON summaries)
+qcmd_hybrid_framework/results/generated_tmds/*.xyz
+qcmd_hybrid_framework/results/generated_tmds/*.cif
+
+# Surrogate model training artifacts
+qcmd_hybrid_framework/models/surrogate/*.pt
+qcmd_hybrid_framework/models/surrogate/checkpoints/
+
+# Score model artifacts  
+qcmd_hybrid_framework/models/tmd_score/*.pt
+qcmd_hybrid_framework/models/tmd_score/checkpoints/
+
+# ============================================================================
+# VALIDATION & ANALYSIS OUTPUTS
+# ============================================================================
+
+# DFT validation intermediate files (keep results JSON/CIF)
+qcmd_hybrid_framework/dft_validation/**/*.gpw
+qcmd_hybrid_framework/dft_validation/**/*.traj
+qcmd_hybrid_framework/dft_validation/**/*.log
+
+# Discovery visualization (large PNGs can be regenerated)
+qcmd_hybrid_framework/discovery_visualization/*.html
+qcmd_hybrid_framework/discovery_visualization/ALL_VISUALIZATIONS.png
+
+# Keep essential outputs
+!qcmd_hybrid_framework/dft_validation/results/*.json
+!qcmd_hybrid_framework/dft_validation/results/*.cif
+!qcmd_hybrid_framework/vibrations_xtb/*.json
+!qcmd_hybrid_framework/vibrations_xtb/*.txt
+!qcmd_hybrid_framework/vibrations_xtb/*.png
+
+# ============================================================================
+# BENCHMARKING & REPORTS
+# ============================================================================
+
+# Benchmark intermediate data
+qcmd_hybrid_framework/results/*/trajectories/
+qcmd_hybrid_framework/results/*/checkpoints/
+
+# Keep summary reports and metrics
+!qcmd_hybrid_framework/results/**/summary.json
+!qcmd_hybrid_framework/results/**/report.md
+!qcmd_hybrid_framework/results/**/per_sample_metrics.json
