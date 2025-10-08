@@ -1,0 +1,111 @@
+📄 tmd_0001_E6.177eV.xyz
+   Nb × 1
+   Se × 2
+   Energy: 6.177 eV
+   Atoms: 3
+
+📄 tmd_0005_E3.189eV.xyz
+   Mo × 1
+   Se × 2
+   Energy: 3.189 eV
+   Atoms: 3
+
+📄 tmd_0006_E6.177eV.xyz
+   Nb × 1
+   Se × 2
+   Energy: 6.177 eV
+   Atoms: 3
+
+📄 tmd_0008_E3.458eV.xyz
+   Cr × 1
+   Cu × 1
+   Se × 2
+   Energy: 3.458 eV
+   Atoms: 4
+
+📄 tmd_0008_E6.948eV.xyz
+   S × 2
+   V × 1
+   Energy: 6.948 eV
+   Atoms: 3
+
+📄 tmd_0011_E-2.722eV.xyz
+   Mo × 2
+   Te × 4
+   Energy: -2.722 eV
+   Atoms: 6
+
+📄 tmd_0019_E-1.810eV.xyz
+   Te × 2
+   V × 1
+   Energy: -1.810 eV
+   Atoms: 3
+
+📄 tmd_0023_E-0.948eV.xyz
+   Nb × 1
+   Te × 2
+   Energy: -0.948 eV
+   Atoms: 3
+
+📄 tmd_0026_E-0.770eV.xyz
+   S × 2
+   Ta × 1
+   Energy: -0.770 eV
+   Atoms: 3
+
+📄 tmd_0029_E-0.770eV.xyz
+   S × 2
+   Ta × 1
+   Energy: -0.770 eV
+   Atoms: 3
+
+📄 tmd_0031_E-0.770eV.xyz
+   S × 2
+   Ta × 1
+   Energy: -0.770 eV
+   Atoms: 3
+
+📄 tmd_0033_E3.927eV.xyz
+   Ag × 1
+   Cr × 1
+   Se × 2
+   Energy: 3.927 eV
+   Atoms: 4
+
+📄 tmd_0037_E6.948eV.xyz
+   S × 2
+   V × 1
+   Energy: 6.948 eV
+   Atoms: 3
+
+📄 tmd_0038_E13.175eV.xyz
+   Cr × 2
+   S × 4
+   Energy: 13.175 eV
+   Atoms: 6
+
+📄 tmd_0040_E-0.106eV.xyz
+   Se × 2
+   Ta × 1
+   Energy: -0.106 eV
+   Atoms: 3
+
+📄 tmd_0042_E-0.106eV.xyz
+   Se × 2
+   Ta × 1
+   Energy: -0.106 eV
+   Atoms: 3
+
+📄 tmd_0043_E6.410eV.xyz
+   Cr × 1
+   Se × 2
+   V × 1
+   Energy: 6.410 eV
+   Atoms: 4
+
+📄 tmd_0044_E-0.849eV.xyz
+   Te × 2
+   W × 1
+   Energy: -0.849 eV
+   Atoms: 3
+

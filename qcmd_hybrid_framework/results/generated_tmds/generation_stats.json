@@ -1,0 +1,37 @@
+{
+  "config": {
+    "dataset_path": "qcmd_hybrid_framework/data/tmd/tmd_materialsproject_enriched.pt",
+    "score_model_path": "qcmd_hybrid_framework/models/tmd_score/score_model_state_dict.pt",
+    "surrogate_path": "qcmd_hybrid_framework/models/tmd_surrogate/surrogate_state_dict.pt",
+    "output_dir": "qcmd_hybrid_framework/results/generated_tmds",
+    "num_samples": 50,
+    "num_steps": 30,
+    "noise_scale": 0.3,
+    "eta": 0.05,
+    "tau": 0.02,
+    "gamma": 0.15,
+    "seed": 42,
+    "device": "cpu",
+    "max_atoms": 30
+  },
+  "statistics": {
+    "total_generated": 50,
+    "valid": 17,
+    "validity_rate": 0.34,
+    "invalid_breakdown": {
+      "nan_inf": 0,
+      "too_close": 33,
+      "dispersed": 0
+    },
+    "energy": {
+      "mean": 77.96521328730661,
+      "std": 188.9104509153715,
+      "min": -12.088292998715552,
+      "max": 1118.9574431390688
+    },
+    "orthogonality": {
+      "mean_error": 4.958087386948268e-16,
+      "max_error": 1.0397377411828121e-15
+    }
+  }
+}
