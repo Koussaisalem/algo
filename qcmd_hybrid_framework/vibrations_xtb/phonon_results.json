@@ -1,0 +1,27 @@
+{
+  "structure": "/workspaces/algo/qcmd_hybrid_framework/dft_validation/results/CrCuSe2_rescue_relaxed.cif",
+  "method": "GFN2-xTB",
+  "n_atoms": 4,
+  "n_modes": 12,
+  "n_real_modes": 12,
+  "n_imaginary_modes": 0,
+  "frequencies_cm-1": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.010907782824322506,
+    8.232303591683182,
+    25.35555425178428,
+    45.566914664409474,
+    72.67380427956721,
+    225.70340635924478,
+    373.6075742819576,
+    468.92100900968757
+  ],
+  "min_real_freq": 0.0,
+  "max_real_freq": 468.92100900968757,
+  "mean_real_freq": 101.67262285176321,
+  "imaginary_freqs": [],
+  "dynamically_stable": true
+}

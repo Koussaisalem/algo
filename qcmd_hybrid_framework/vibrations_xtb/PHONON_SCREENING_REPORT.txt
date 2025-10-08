@@ -1,0 +1,18 @@
+================================================================================
+PHONON PRE-SCREENING REPORT: CrCuSe₂ Dynamic Stability
+================================================================================
+
+Structure: /workspaces/algo/qcmd_hybrid_framework/dft_validation/results/CrCuSe2_rescue_relaxed.cif
+Method: GFN2-xTB vibrational analysis
+Date: 2025-10-08
+
+Results:
+  Total modes: 12
+  Real modes: 12
+  Imaginary modes: 0
+
+Verdict: DYNAMICALLY STABLE ✅
+
+Recommended next step: Proceed to DFT phonon calculation
+
+================================================================================

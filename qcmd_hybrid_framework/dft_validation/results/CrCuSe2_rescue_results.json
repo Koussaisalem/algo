@@ -1,0 +1,26 @@
+{
+  "structure_name": "CrCuSe2_rescue",
+  "initial_composition": "CrCuSe2",
+  "final_composition": "CrCuSe2",
+  "num_atoms": 4,
+  "converged": true,
+  "calculation_mode": "fast",
+  "total_energy_eV": -15.288124081298616,
+  "energy_per_atom_eV": -3.822031020324654,
+  "properties": {
+    "total_energy": -15.288124081298616,
+    "energy_per_atom": -3.822031020324654,
+    "max_force": 0.672689309271363,
+    "rms_force": 0.5873787674679072,
+    "z_extent": 3.1979357299999993,
+    "min_bond_length": 2.167904889031961,
+    "mean_bond_length": 2.2055997573221537,
+    "max_bond_length": 2.280213163285132,
+    "fermi_level": -5.5014838481632635
+  },
+  "cell_parameters": {
+    "a": 7.2615267249999995,
+    "b": 9.396491939999997,
+    "c": 33.19793573
+  }
+}
