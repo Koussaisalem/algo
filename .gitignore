@@ -141,3 +141,63 @@ qcmd_hybrid_framework/results/*/checkpoints/
 !qcmd_hybrid_framework/results/**/summary.json
 !qcmd_hybrid_framework/results/**/report.md
 !qcmd_hybrid_framework/results/**/per_sample_metrics.json
+# === Repository Restructure Additions ===
+
+# Large data files
+*.traj
+*.log
+*.pt
+*.pth
+*.h5
+*.hdf5
+data/**/*.pt
+data/**/*.traj
+
+# DFT temporary files
+*.gpw
+*.txt
+gpaw-*.txt
+optimization*.traj
+rescue*.traj
+*_attempt*.traj
+*_stage*.traj
+
+# xTB cache files
+vibrations_xtb/vib/cache*.json
+xtbopt.log
+xtb*.log
+
+# Sensitive/API keys
+*.key
+*.env
+.env
+secrets/
+api_keys/
+
+# Large result files
+results/**/*.xyz
+results/**/*.png
+results/**/*.html
+!results/**/summary.json
+!results/**/report.md
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# MacOS
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
