@@ -1,254 +1,506 @@
-<div align="center"># QCMD Hybrid Framework
+# Quantum Materials Discovery Platform<div align="center"># QCMD Hybrid Framework
 
 
 
-# Quantum Materials Discovery PlatformThe hybrid framework wraps the verified QCMD-ECS manifold engine with data preparation,
+> AI-driven discovery of materials with exotic quantum properties
 
-enrichment, and model tooling aimed at NequIP-based neural components. Every script in
+
+
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square&logo=github)](https://github.com/Koussaisalem/algo/actions)# Quantum Materials Discovery PlatformThe hybrid framework wraps the verified QCMD-ECS manifold engine with data preparation,
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Koussaisalem/algo/blob/main/LICENSE)
+
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org)enrichment, and model tooling aimed at NequIP-based neural components. Every script in
+
+[![Stars](https://img.shields.io/github/stars/Koussaisalem/algo?style=flat-square&logo=github&color=yellow)](https://github.com/Koussaisalem/algo/stargazers)
 
 <p align="center">this directory assumes double-precision (`torch.float64`) tensors and is compatible with
 
+---
+
   <i>AI-driven discovery of materials with exotic quantum properties</i>the Stiefel operators in `qcmd_hybrid_framework/qcmd_ecs/core`.
 
+## Overview
+
 </p>
+
+This repository contains a unified platform for discovering novel quantum materials through AI-driven generative modeling, DFT validation, and synthesis planning. The platform combines manifold-constrained diffusion models with high-throughput computational screening to identify materials with exotic properties.
 
 ## Directory layout
 
-<p align="center">
+**Key Features:**
 
-  <a href="https://github.com/Koussaisalem/algo/actions">```
+- 🎯 Manifold-constrained generative models (Stiefel manifold diffusion)<p align="center">
 
-    <img src="https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square&logo=github" alt="Tests">qcmd_hybrid_framework/
+- 🔬 Multi-scale validation pipeline (xTB → DFT → phonons)
 
-  </a>├── data/                 # Cached datasets and enrichment artifacts
+- 🧪 Synthesis protocol design (MBE temperature screening)  <a href="https://github.com/Koussaisalem/algo/actions">```
 
-  <a href="https://github.com/Koussaisalem/algo/blob/main/LICENSE">├── manifold_utils.py     # Mass-weighted frames and unit conversions
+- 📊 Advanced benchmarking and analysis tools
 
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License">├── models/               # Surrogate and score-model definitions
-
-  </a>└── scripts/              # End-to-end pipeline stages
-
-  <a href="https://github.com/Koussaisalem/algo">    ├── 01_prepare_data.py
-
-    <img src="https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square&logo=python" alt="Python">    ├── 02_enrich_dataset.py
-
-  </a>    ├── 03_train_surrogate.py
-
-  <a href="https://github.com/Koussaisalem/algo/stargazers">    └── 05_advanced_benchmark.py
-
-    <img src="https://img.shields.io/github/stars/Koussaisalem/algo?style=flat-square&logo=github&color=yellow" alt="Stars">```
-
-  </a>
-
-</p>## Pipeline stages
+- 🤝 Collaboration-ready documentation and workflows    <img src="https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square&logo=github" alt="Tests">qcmd_hybrid_framework/
 
 
 
-<p align="center">### 1. Prepare a QM9 micro-dataset
+---  </a>├── data/                 # Cached datasets and enrichment artifacts
 
-  <a href="#overview">Overview</a> •
 
-  <a href="#key-achievements">Achievements</a> •`01_prepare_data.py` downloads the QM9 dataset with PyTorch Geometric, selects a seeded
 
-  <a href="#installation">Installation</a> •subset (`NUM_SAMPLES`) of molecules, and stores an `AtomicDataDict`-compatible payload in
+## Recent Discoveries  <a href="https://github.com/Koussaisalem/algo/blob/main/LICENSE">├── manifold_utils.py     # Mass-weighted frames and unit conversions
 
-  <a href="#projects">Projects</a> •`data/qm9_micro_5k.pt`.
 
-  <a href="#documentation">Documentation</a> •
 
-  <a href="#citation">Citation</a>Run it from the repository root or the `qcmd_hybrid_framework` directory:
+### CrCuSe₂ - Hetero-Metallic 2D Semiconductor    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License">├── models/               # Surrogate and score-model definitions
 
-</p>
+
+
+| Property | Value | Significance |  </a>└── scripts/              # End-to-end pipeline stages
+
+|----------|-------|--------------|
+
+| **Structure** | P 1 space group, layered 2D | Novel magnetic TMD |  <a href="https://github.com/Koussaisalem/algo">    ├── 01_prepare_data.py
+
+| **Band Gap** | 0.616 eV (indirect) | Ideal for electronics |
+
+| **Stability** | 0 imaginary phonons | Thermodynamically stable |    <img src="https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square&logo=python" alt="Python">    ├── 02_enrich_dataset.py
+
+| **Validation** | xTB + GPAW DFT + Consultant | 97% accuracy confirmed |
+
+| **Synthesis** | MBE at 450-550°C | Experimentally feasible |  </a>    ├── 03_train_surrogate.py
+
+
+
+**Status:** Ready for experimental validation • [Full Discovery Report →](docs/discoveries/CrCuSe2/DISCOVERY.md)  <a href="https://github.com/Koussaisalem/algo/stargazers">    └── 05_advanced_benchmark.py
+
+
+
+---    <img src="https://img.shields.io/github/stars/Koussaisalem/algo?style=flat-square&logo=github&color=yellow" alt="Stars">```
+
+
+
+## Repository Structure  </a>
+
+
+
+```</p>## Pipeline stages
+
+algo/
+
+├── core/                          # Shared infrastructure
+
+│   ├── qcmd_ecs/                 # Stiefel manifold framework
+
+│   │   ├── manifold.py           # Tangent projection & retraction<p align="center">### 1. Prepare a QM9 micro-dataset
+
+│   │   ├── dynamics.py           # Reverse diffusion sampling
+
+│   │   └── types.py              # Precision constants  <a href="#overview">Overview</a> •
+
+│   ├── models/                   # Neural architectures
+
+│   │   ├── score_model.py        # Diffusion score network  <a href="#key-achievements">Achievements</a> •`01_prepare_data.py` downloads the QM9 dataset with PyTorch Geometric, selects a seeded
+
+│   │   ├── surrogate.py          # GNN energy predictor
+
+│   │   └── tmd_surrogate.py      # TMD-specific model  <a href="#installation">Installation</a> •subset (`NUM_SAMPLES`) of molecules, and stores an `AtomicDataDict`-compatible payload in
+
+│   └── legacy_models/            # Original implementations
+
+│  <a href="#projects">Projects</a> •`data/qm9_micro_5k.pt`.
+
+├── projects/                     # Research projects
+
+│   └── phononic-discovery/       # Active: Phononic analog gravity  <a href="#documentation">Documentation</a> •
+
+│       ├── scripts/              # Discovery pipeline (10+ scripts)
+
+│       ├── dft_validation/       # GPAW validation workflow  <a href="#citation">Citation</a>Run it from the repository root or the `qcmd_hybrid_framework` directory:
+
+│       ├── synthesis_lab/        # MBE protocol design
+
+│       └── results/              # Generated structures & analysis</p>
+
+│
+
+└── docs/                         # Documentation```bash
+
+    ├── architecture/             # System design & specs
+
+    ├── discoveries/              # Material discovery reports</div>cd /workspaces/algo/qcmd_hybrid_framework
+
+    └── guides/                   # User & developer guides
+
+```python scripts/01_prepare_data.py
+
+
+
+------```
+
+
+
+## Quick Start
+
+
+
+### Installation## Overview### 2. Enrich with GFN2-xTB metadata
+
+
 
 ```bash
 
-</div>cd /workspaces/algo/qcmd_hybrid_framework
+# Clone repository
 
-python scripts/01_prepare_data.py
+git clone https://github.com/Koussaisalem/algo.gitThis platform combines **manifold-constrained generative AI** with **ab-initio quantum chemistry** to systematically discover materials with targeted topological and electronic properties.`02_enrich_dataset.py` adds physics-aware annotations needed for manifold diffusion:
 
----```
-
-
-
-## Overview### 2. Enrich with GFN2-xTB metadata
+cd algo
 
 
 
-This platform combines **manifold-constrained generative AI** with **ab-initio quantum chemistry** to systematically discover materials with targeted topological and electronic properties.`02_enrich_dataset.py` adds physics-aware annotations needed for manifold diffusion:
+# Create environment
 
+conda create -n qcmd python=3.10**Core Innovation**: Diffusion models operating on the Stiefel manifold, enabling physics-aware crystal structure generation with built-in symmetry constraints and orthonormality preservation.- Single-point GFN2-xTB energy (Hartree and eV)
 
-
-**Core Innovation**: Diffusion models operating on the Stiefel manifold, enabling physics-aware crystal structure generation with built-in symmetry constraints and orthonormality preservation.- Single-point GFN2-xTB energy (Hartree and eV)
+conda activate qcmd
 
 - Forces converted to eV/Å
 
-<details>- Molecular orbital coefficients
+# Install dependencies
 
-<summary><b>Technical Architecture</b> (click to expand)</summary>- Mass-weighted orthonormal frames (via `manifold_utils.compute_manifold_frame`)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118<details>- Molecular orbital coefficients
+
+pip install torch-geometric torch-scatter torch-sparse
+
+pip install schnetpack ase gpaw rdkit<summary><b>Technical Architecture</b> (click to expand)</summary>- Mass-weighted orthonormal frames (via `manifold_utils.compute_manifold_frame`)
+
+pip install -e .
+
+```
 
 
 
-<br>The script checkpoints progress and logs failures so long jobs can resume safely.
+### Run Discovery Pipeline<br>The script checkpoints progress and logs failures so long jobs can resume safely.
 
 
+
+```bash
+
+cd projects/phononic-discovery/framework/scripts
 
 **Key Components**:```bash
 
-- **Stiefel Manifold Diffusion**: Constrained generation preserving geometric structurecd /workspaces/algo/qcmd_hybrid_framework
+# 1. Prepare dataset (QM9 subset)
 
-- **Equivariant GNN Surrogates**: Fast property prediction respecting E(3) symmetriespython scripts/02_enrich_dataset.py \
+python 01_prepare_data.py- **Stiefel Manifold Diffusion**: Constrained generation preserving geometric structurecd /workspaces/algo/qcmd_hybrid_framework
+
+
+
+# 2. Enrich with xTB calculations- **Equivariant GNN Surrogates**: Fast property prediction respecting E(3) symmetriespython scripts/02_enrich_dataset.py \
+
+python 02_enrich_dataset.py --input_path ../data/qm9_micro_5k.pt
 
 - **Automated DFT Pipeline**: GPAW-based validation with phonon analysis  --input-path data/qm9_micro_5k.pt \
 
-- **Synthesis Design**: MBE/CVD parameter optimization via AIMD  --output-path data/qm9_micro_5k_enriched.pt \
+# 3. Train surrogate energy model
 
-  --checkpoint-every 25 \
+python 03_train_surrogate.py- **Synthesis Design**: MBE/CVD parameter optimization via AIMD  --output-path data/qm9_micro_5k_enriched.pt \
+
+
+
+# 4. Generate candidate structures  --checkpoint-every 25 \
+
+python 06_generate_structures.py --num_samples 100
 
 **Workflow**:  --overwrite
 
-``````
+# 5. Validate with DFT
 
-Generative Model → Candidate Structures → GNN Surrogate → DFT Validation → Synthesis Protocols
+cd ../dft_validation``````
 
-```Use `--resume` to append to an existing enrichment file, and `--max-molecules` to process
+python run_gpaw_validation.py --structure ../results/candidate_001.xyz
 
-smaller batches while debugging.
+```Generative Model → Candidate Structures → GNN Surrogate → DFT Validation → Synthesis Protocols
 
-</details>
 
-### 3. Train the NequIP surrogate
 
----
+---```Use `--resume` to append to an existing enrichment file, and `--max-molecules` to process
 
-`03_train_surrogate.py` consumes the enriched dataset to fit the NequIP surrogate defined
 
-## Key Achievementsin `models/surrogate.py`. The script performs a reproducible train/val/test split,
 
-trains with Adam in double precision, checkpoints the best validation weights, and
+## Core Frameworksmaller batches while debugging.
 
-<table>writes JSON metrics for future reporting.
+
+
+### Stiefel Manifold Diffusion</details>
+
+
+
+The core engine implements diffusion on the Stiefel manifold St(m,k) for generating molecular orbital configurations:### 3. Train the NequIP surrogate
+
+
+
+```python---
+
+from core.qcmd_ecs.core.dynamics import run_reverse_diffusion
+
+from core.qcmd_ecs.core.manifold import project_to_tangent_space, retract_to_manifold`03_train_surrogate.py` consumes the enriched dataset to fit the NequIP surrogate defined
+
+
+
+# Define score and energy models## Key Achievementsin `models/surrogate.py`. The script performs a reproducible train/val/test split,
+
+def score_fn(t: int, U: Tensor) -> Tensor:
+
+    return score_model(U, t)trains with Adam in double precision, checkpoints the best validation weights, and
+
+
+
+def energy_fn(U: Tensor) -> Tensor:<table>writes JSON metrics for future reporting.
+
+    return surrogate_model(U)
 
   <tr>
 
-    <td align="center" width="33%">```bash
+# Run diffusion sampling
 
-      <h3>Novel 2D Material</h3>cd /workspaces/algo/qcmd_hybrid_framework
+samples = run_reverse_diffusion(    <td align="center" width="33%">```bash
 
-      <p><b>CrCuSe₂</b></p>python scripts/03_train_surrogate.py \
+    score_fn=score_fn,
 
-      <p>Hetero-metallic TMD with 0.6 eV bandgap</p>  --dataset-path data/qm9_micro_5k_enriched.pt \
+    energy_fn=energy_fn,      <h3>Novel 2D Material</h3>cd /workspaces/algo/qcmd_hybrid_framework
+
+    num_steps=1000,
+
+    shape=(num_atoms, 3),      <p><b>CrCuSe₂</b></p>python scripts/03_train_surrogate.py \
+
+    beta_schedule='cosine'
+
+)      <p>Hetero-metallic TMD with 0.6 eV bandgap</p>  --dataset-path data/qm9_micro_5k_enriched.pt \
+
+```
 
       <p><i>Dynamically stable (0 imaginary phonons)</i></p>  --output-dir models/surrogate_runs/default \
 
+### Key Operations
+
       <a href="docs/discoveries/CrCuSe2/">Read more →</a>  --epochs 100 \
 
-    </td>  --batch-size 32 \
+- **Tangent Projection:** Ensures gradients respect manifold constraints
+
+- **Retraction:** Maps tangent vectors back to manifold via QR decomposition    </td>  --batch-size 32 \
+
+- **Energy Guidance:** Incorporates surrogate energy for biased sampling
 
     <td align="center" width="33%">  --lr 5e-4
 
+**Performance:** Double precision (`torch.float64`) with rigorous orthonormality checks (tolerance: 1e-9)
+
       <h3>Computational Validation</h3>```
-
-      <p><b>Multi-scale verification</b></p>
-
-      <p>xTB → DFT → Phonon dispersion</p>The default target is the xTB energy in eV (`energy_ev`). Switch to Hartree supervision
-
-      <p><i>97% consultant validation accuracy</i></p>with `--target energy_hartree` if you prefer to postpone the unit conversion.
-
-      <a href="docs/discoveries/CrCuSe2/VALIDATION.md">Validation report →</a>
-
-    </td>### 4. Train the score model
-
-    <td align="center" width="33%">
-
-      <h3>Synthesis Protocol</h3>`04_train_score_model.py` trains a NequIP-based neural network to predict
-
-      <p><b>MBE growth design</b></p>score functions (directions toward the data manifold) from noisy samples.
-
-      <p>Temperature screening via AIMD</p>The model learns to denoise manifold frames using multiple noise scales
-
-      <p><i>Optimal conditions computed</i></p>for robust generalization.
-
-      <a href="projects/phononic-discovery/framework/synthesis_lab/">Protocols →</a>
-
-    </td>```bash
-
-  </tr>cd /workspaces/algo/qcmd_hybrid_framework
-
-</table>python scripts/04_train_score_model.py \
-
-  --dataset-path data/qm9_micro_5k_enriched.pt \
-
----  --output-dir models/score_model \
-
-  --epochs 100 \
-
-## Installation  --batch-size 16 \
-
-  --lr 5e-4 \
-
-```bash  --noise-levels 0.1 0.2 0.3 0.5
-
-# Clone repository```
-
-git clone https://github.com/Koussaisalem/algo.git
-
-cd algoThe trained weights are saved to `models/score_model/score_model_state_dict.pt`
-
-along with training metrics. This replaces the oracle score used in earlier
-
-# Install dependenciesbenchmarks with a learned neural predictor.
-
-pip install -r requirements.txt
-
-### 5. Advanced CMD-ECS vs Euclidean benchmarking
-
-# Verify installation (tests coming soon)
-
-python -c "from core.qcmd_ecs.core import manifold; print('Installation successful!')"`05_advanced_benchmark.py` replays the reverse-diffusion process with three
-
-```strategies—true CMD-ECS updates, an unconstrained Euclidean walk, and a
-
-post-hoc retracted Euclidean walk—using oracle scores and the trained surrogate
-
-<details>for evaluation. RDKit is used to compare generated geometries against the
-
-<summary><b>Requirements</b></summary>ground-truth frames.
-
-
-
-<br>```bash
-
-cd /workspaces/algo/qcmd_hybrid_framework
-
-- Python ≥ 3.10python scripts/05_advanced_benchmark.py \
-
-- PyTorch ≥ 2.0  --num-samples 128 \
-
-- PyTorch Geometric  --num-steps 40 \
-
-- ASE (Atomic Simulation Environment)  --noise-scale 0.2 \
-
-- GPAW (optional, for DFT calculations)  --gamma 0.1 \
-
-- xTB (optional, for semi-empirical methods)  --surrogate-path models/surrogate/surrogate_state_dict.pt \
-
-  --output-dir results/advanced_benchmark
-
-See [`requirements.txt`](requirements.txt) for complete dependencies.```
-
-
-
-</details>Setting `--gamma 0.1` activates MAECS (energy-guided diffusion). Use `--gamma 0.0`
-
-to test pure manifold diffusion without energy steering.
 
 ---
 
+      <p><b>Multi-scale verification</b></p>
+
+## Projects
+
+      <p>xTB → DFT → Phonon dispersion</p>The default target is the xTB energy in eV (`energy_ev`). Switch to Hartree supervision
+
+### 1. Phononic Discovery
+
+      <p><i>97% consultant validation accuracy</i></p>with `--target energy_hartree` if you prefer to postpone the unit conversion.
+
+**Objective:** Discover materials with Dirac/Weyl phonon band structures for analog gravity experiments
+
+      <a href="docs/discoveries/CrCuSe2/VALIDATION.md">Validation report →</a>
+
+**Status:** Active discovery phase
+
+- ✅ CrCuSe₂ discovered and validated    </td>### 4. Train the score model
+
+- ⏳ Temperature screening via AIMD
+
+- 📝 Collaboration proposal for Université Le Mans    <td align="center" width="33%">
+
+
+
+[Read more →](projects/phononic-discovery/README.md)      <h3>Synthesis Protocol</h3>`04_train_score_model.py` trains a NequIP-based neural network to predict
+
+
+
+### 2. Foundation Model (Planned)      <p><b>MBE growth design</b></p>score functions (directions toward the data manifold) from noisy samples.
+
+
+
+**Objective:** Multi-domain foundation model covering semiconductors, structural materials, acoustics, and topological phases      <p>Temperature screening via AIMD</p>The model learns to denoise manifold frames using multiple noise scales
+
+
+
+**Status:** Data curation planning      <p><i>Optimal conditions computed</i></p>for robust generalization.
+
+- Strategy: Hybrid storage (code in git, data external)
+
+- Sources: Materials Project, OQMD, C2DB, custom DFPT      <a href="projects/phononic-discovery/framework/synthesis_lab/">Protocols →</a>
+
+- Training: Cามber GPU credits + HPC cluster
+
+    </td>```bash
+
+---
+
+  </tr>cd /workspaces/algo/qcmd_hybrid_framework
+
+## Documentation
+
+</table>python scripts/04_train_score_model.py \
+
+### For Users
+
+- [Installation Guide](docs/guides/INSTALLATION.md) - Setup instructions  --dataset-path data/qm9_micro_5k_enriched.pt \
+
+- [Discovery Workflow](docs/guides/WORKFLOW.md) - End-to-end pipeline
+
+- [FAQ](docs/guides/FAQ.md) - Common questions---  --output-dir models/score_model \
+
+
+
+### For Developers  --epochs 100 \
+
+- [Architecture Overview](docs/architecture/OVERVIEW.md) - System design
+
+- [API Reference](docs/api/README.md) - Core modules## Installation  --batch-size 16 \
+
+- [Contributing Guide](CONTRIBUTING.md) - Development workflow
+
+  --lr 5e-4 \
+
+### Discovery Reports
+
+- [CrCuSe₂ Discovery](docs/discoveries/CrCuSe2/DISCOVERY.md) - Comprehensive technical report```bash  --noise-levels 0.1 0.2 0.3 0.5
+
+- [Validation Checklist](docs/discoveries/CrCuSe2/VALIDATION.md) - Multi-scale verification
+
+# Clone repository```
+
+---
+
+git clone https://github.com/Koussaisalem/algo.git
+
+## Citation
+
+cd algoThe trained weights are saved to `models/score_model/score_model_state_dict.pt`
+
+If you use this platform in your research, please cite:
+
+along with training metrics. This replaces the oracle score used in earlier
+
+```bibtex
+
+@software{qcmd_platform_2025,# Install dependenciesbenchmarks with a learned neural predictor.
+
+  title = {Quantum Materials Discovery Platform},
+
+  author = {Koussai Salem},pip install -r requirements.txt
+
+  year = {2025},
+
+  url = {https://github.com/Koussaisalem/algo}### 5. Advanced CMD-ECS vs Euclidean benchmarking
+
+}
+
+```# Verify installation (tests coming soon)
+
+
+
+For the CrCuSe₂ discovery:python -c "from core.qcmd_ecs.core import manifold; print('Installation successful!')"`05_advanced_benchmark.py` replays the reverse-diffusion process with three
+
+
+
+```bibtex```strategies—true CMD-ECS updates, an unconstrained Euclidean walk, and a
+
+@article{crcuse2_discovery_2025,
+
+  title = {AI-Driven Discovery of CrCuSe₂: A Hetero-Metallic 2D Semiconductor},post-hoc retracted Euclidean walk—using oracle scores and the trained surrogate
+
+  author = {Koussai Salem},
+
+  journal = {In preparation},<details>for evaluation. RDKit is used to compare generated geometries against the
+
+  year = {2025}
+
+}<summary><b>Requirements</b></summary>ground-truth frames.
+
+```
+
+
+
+---
+
+<br>```bash
+
+## Collaboration
+
+cd /workspaces/algo/qcmd_hybrid_framework
+
+We welcome collaborations on:
+
+- **Experimental validation** of discovered materials- Python ≥ 3.10python scripts/05_advanced_benchmark.py \
+
+- **Phononic materials** for analog gravity research
+
+- **Foundation model training** with domain-specific datasets- PyTorch ≥ 2.0  --num-samples 128 \
+
+- **Synthesis protocol optimization** via AIMD/DFT
+
+- PyTorch Geometric  --num-steps 40 \
+
+**Contact:** Open an issue or reach out via [GitHub Discussions](https://github.com/Koussaisalem/algo/discussions)
+
+- ASE (Atomic Simulation Environment)  --noise-scale 0.2 \
+
+**Academic Partners:**
+
+- Université Le Mans (LAUM) - Phononic materials and acoustics- GPAW (optional, for DFT calculations)  --gamma 0.1 \
+
+
+
+---- xTB (optional, for semi-empirical methods)  --surrogate-path models/surrogate/surrogate_state_dict.pt \
+
+
+
+## License  --output-dir results/advanced_benchmark
+
+
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.See [`requirements.txt`](requirements.txt) for complete dependencies.```
+
+
+
+---
+
+
+
+## Acknowledgments</details>Setting `--gamma 0.1` activates MAECS (energy-guided diffusion). Use `--gamma 0.0`
+
+
+
+- **Frameworks:** PyTorch, PyTorch Geometric, SchNetPack, ASE, GPAWto test pure manifold diffusion without energy steering.
+
+- **Data Sources:** QM9, Materials Project, OQMD
+
+- **Compute:** GitHub Codespaces, Cามber (via GitHub Education)---
+
+- **Inspiration:** Analog gravity research community
+
 Artifacts include per-sample metrics, a summary JSON, and a Markdown report
+
+---
 
 ## Projects(`results/advanced_benchmark/report.md`) that names the winning method (currently
 
-CMD-ECS) and highlights where Euclidean baselines fail.
+<div align="center">
+
+  <sub>Built with ❤️ for the quantum materials community</sub>CMD-ECS) and highlights where Euclidean baselines fail.
+
+</div>
 
 ### [Phononic Materials for Analog Gravity](projects/phononic-discovery/)
 
