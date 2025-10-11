@@ -57,7 +57,7 @@ U_new = retract_to_manifold(U + step_size * U_tangent)
 assert torch.allclose(U_new.T @ U_new, torch.eye(k), atol=1e-9)
 ```
 
-See [Stiefel Manifold Theory](STIEFEL_MANIFOLD.md) for mathematical details.
+See [Stiefel Manifold Theory](../theory/STIEFEL_MANIFOLD_THEORY.md) for complete mathematical details.
 
 ---
 

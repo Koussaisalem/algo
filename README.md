@@ -240,7 +240,13 @@ python analyze_enriched_dataset.py
 
 ### Stiefel Manifold Diffusion
 
-The core engine implements diffusion on the Stiefel manifold St(m,k) for generating molecular orbital configurations:
+**The Mathematical Heart** 💎
+
+The core engine implements **Quantum-Constrained Manifold Diffusion with Energy-Consistent Score (QCMD-ECS)** - a paradigm shift from *learning physics* to *respecting it by construction*.
+
+📖 **[Read the Complete Mathematical Theory](docs/theory/STIEFEL_MANIFOLD_THEORY.md)** ← Your best work!
+
+The algorithm operates on the Stiefel manifold $\mathrm{St}(m,k)$ for generating molecular orbital configurations:
 
 ```python
 from core.qcmd_ecs.core.dynamics import run_reverse_diffusion
@@ -263,11 +269,23 @@ samples = run_reverse_diffusion(
 )
 ```
 
-### Key Operations
+### Key Theoretical Innovations
 
-- **Tangent Projection:** Ensures gradients respect manifold constraints
+🏆 **Manifold-Adjusted Energy-Consistent Score (MAECS)**:
+$$\mathcal{S}_{\mathrm{MAE}}(\mathcal{X}_t, t) = \Pi_{\mathcal{T}_{\mathbf{U}}}\big(s_{\theta}(\mathcal{X}_t,t) + \gamma(t)\,\nabla \widehat{E}_\phi(\mathcal{X}_t)\big)$$
+
+Where:
+- $s_\theta$ = Learned score (data-driven)
+- $\nabla \widehat{E}_\phi$ = Energy gradient (physics-based)
+- $\Pi_{\mathcal{T}_{\mathbf{U}}}$ = Tangent space projection (geometry-constrained)
+
+**Theoretical Guarantee**: Generated samples follow energy-weighted distribution $p(\mathcal{X}) \propto \exp(-\beta' \widehat{E}_\phi(\mathcal{X})) \cdot p_{\text{data}}(\mathcal{X})$
+
+**Key Operations:**
+- **Tangent Projection:** Ensures gradients respect manifold constraints ($\mathcal{O}(mk^2)$)
 - **Retraction:** Maps tangent vectors back to manifold via QR decomposition
-- **Energy Guidance:** Incorporates surrogate energy for biased sampling
+- **Energy Guidance:** Incorporates differentiable surrogate energy for biased sampling
+- **100% Validity:** Orthonormality guaranteed by construction
 
 **Performance:** Double precision (`torch.float64`) with rigorous orthonormality checks (tolerance: 1e-9)
 
@@ -358,6 +376,7 @@ pie title "Computational Budget Distribution"
 
 | Document | Description | Status |
 |----------|-------------|--------|
+| 💎 [**Stiefel Manifold Theory**](docs/theory/STIEFEL_MANIFOLD_THEORY.md) | **Complete mathematical foundation (QCMD-ECS)** | ⭐ **Crown Jewel** |
 | [Architecture Overview](docs/architecture/OVERVIEW.md) | System design & technical specs | ✅ Complete |
 | [CrCuSe₂ Discovery Report](docs/discoveries/CrCuSe2/DISCOVERY.md) | Comprehensive discovery documentation | ✅ Complete |
 | [README Styling Guide](docs/guides/README_STYLING_OPTIONS.md) | Professional README formatting options | ✅ Complete |
