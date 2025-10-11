@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/workspaces/algo/qcmd_hybrid_framework/scripts/tmd/04_generate_tmd_structures.py", line 30, in <module>
-    from qcmd_hybrid_framework.models.tmd_score import TMDScoreModel
-ImportError: cannot import name 'TMDScoreModel' from 'qcmd_hybrid_framework.models.tmd_score' (unknown location)
