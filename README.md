@@ -377,6 +377,7 @@ pie title "Computational Budget Distribution"
 | Document | Description | Status |
 |----------|-------------|--------|
 | 💎 [**Stiefel Manifold Theory**](docs/theory/STIEFEL_MANIFOLD_THEORY.md) | **Complete mathematical foundation (QCMD-ECS)** | ⭐ **Crown Jewel** |
+| 🎯 [**Scripts Reference**](docs/guides/SCRIPTS_REFERENCE.md) | **Quick reference for all training scripts** | ⭐ **Essential** |
 | [Architecture Overview](docs/architecture/OVERVIEW.md) | System design & technical specs | ✅ Complete |
 | [CrCuSe₂ Discovery Report](docs/discoveries/CrCuSe2/DISCOVERY.md) | Comprehensive discovery documentation | ✅ Complete |
 | [README Styling Guide](docs/guides/README_STYLING_OPTIONS.md) | Professional README formatting options | ✅ Complete |
