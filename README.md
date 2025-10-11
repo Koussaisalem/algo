@@ -53,13 +53,13 @@ graph LR
     E --> F[📈 Property Analysis<br/>Band Structure & Phonons]
     F --> G[🧪 Synthesis Design<br/>MBE Temperature Screening]
     
-    style A fill:#e1f5ff
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e9
-    style E fill:#fff9c4
-    style F fill:#fce4ec
-    style G fill:#e0f2f1
+    style A fill:#1a5490,stroke:#58a6ff,stroke-width:2px,color:#fff
+    style B fill:#7d4e00,stroke:#d29922,stroke-width:2px,color:#fff
+    style C fill:#6e3a8a,stroke:#bc8cff,stroke-width:2px,color:#fff
+    style D fill:#0d5e2a,stroke:#3fb950,stroke-width:2px,color:#fff
+    style E fill:#7d4e00,stroke:#d29922,stroke-width:2px,color:#fff
+    style F fill:#8b2252,stroke:#f778ba,stroke-width:2px,color:#fff
+    style G fill:#0d5e5e,stroke:#39c5bb,stroke-width:2px,color:#fff
 ```
 
 **Result:** ✨ **CrCuSe₂ discovered** - First hetero-metallic TMD with validated 0.616 eV bandgap
@@ -94,10 +94,10 @@ graph TB
         Cr -.-> Se2
     end
     
-    style Cr fill:#ff6b6b
-    style Cu fill:#4ecdc4
-    style Se1 fill:#ffe66d
-    style Se2 fill:#ffe66d
+    style Cr fill:#da3633,stroke:#f85149,stroke-width:2px,color:#fff
+    style Cu fill:#1f6feb,stroke:#58a6ff,stroke-width:2px,color:#fff
+    style Se1 fill:#9e6a03,stroke:#d29922,stroke-width:2px,color:#fff
+    style Se2 fill:#9e6a03,stroke:#d29922,stroke-width:2px,color:#fff
 ```
 
 **Lattice:** 2D layered TMD  
@@ -125,9 +125,9 @@ graph LR
     A[MoS₂<br/>1.8 eV] -.->|"Too wide"| B[CrCuSe₂<br/>0.616 eV<br/>⭐ IDEAL]
     B -.->|"Too narrow"| C[Graphene<br/>0 eV]
     
-    style A fill:#ffcccb
-    style B fill:#90ee90
-    style C fill:#ffcccb
+    style A fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
+    style B fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
+    style C fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
 ```
 
 </td>
@@ -309,18 +309,21 @@ samples = run_reverse_diffusion(
 The Stiefel manifold constraint provides **2.3x better stability** compared to unconstrained Euclidean sampling:
 
 ```mermaid
-gantt
-    title Performance Comparison (Lower = Better)
-    dateFormat X
-    axisFormat %s
+graph TB
+    subgraph "Stability Score (Lower = Better)"
+        E1[Euclidean Baseline<br/>Score: 2.3]
+        S1[Stiefel Manifold<br/>Score: 1.0<br/>⭐ 2.3x Better]
+    end
     
-    section Stability Score
-    Euclidean Baseline    :0, 2.3
-    Stiefel Manifold     :0, 1.0
+    subgraph "Orthonormality Error"
+        E2[Euclidean Baseline<br/>Error: 1e-3]
+        S2[Stiefel Manifold<br/>Error: 1e-9<br/>⭐ 10^6x Better]
+    end
     
-    section Orthonormality Error
-    Euclidean Baseline    :0, 1e-3
-    Stiefel Manifold     :0, 1e-9
+    style E1 fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
+    style S1 fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
+    style E2 fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
+    style S2 fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
 ```
 
 ### Discovery Success Rate
