@@ -11,6 +11,22 @@ numpy==1.26.4
 
 # Testing
 pytest==8.4.2
+pytest-cov==6.0.0
+pytest-xdist==3.6.1
+pytest-timeout==2.2.0
+
+# Code quality
+black==24.10.0
+flake8==7.1.1
+isort==5.13.2
+mypy==1.13.0
+
+# Security
+pip-audit==2.7.3
+
+# Development utilities
+ipython==8.31.0
+jupyter==1.1.1
 
 # Optional tooling (install manually if needed)
 # xtb-python  # QM driver used during dataset enrichment; available via conda-forge

@@ -205,3 +205,4 @@ temp/
 .coverage
 coverage.xml
 htmlcov/
+!requirements-dev.txt
