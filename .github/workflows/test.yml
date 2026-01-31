@@ -117,8 +117,8 @@ jobs:
         U_0, _ = torch.linalg.qr(U_0)
         
         results = run_reverse_diffusion(
-            score_fn=dummy_score,
-            energy_fn=dummy_energy,
+            score_model=dummy_score,
+            energy_gradient_model=dummy_energy,
             U_T=U_0,
             num_steps=5,
             dt=1e-3
