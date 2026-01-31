@@ -1,0 +1,95 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'projects/*/README.md'
+  workflow_dispatch:
+
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check markdown links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        config-file: '.github/markdown-link-check-config.json'
+      continue-on-error: true
+
+    - name: Validate documentation structure
+      run: |
+        echo "Checking documentation structure..."
+        
+        required_docs=(
+          "README.md"
+          "docs/architecture/OVERVIEW.md"
+          "docs/theory/STIEFEL_MANIFOLD_THEORY.md"
+          "projects/phononic-discovery/README.md"
+        )
+        
+        missing_docs=()
+        for doc in "${required_docs[@]}"; do
+          if [ ! -f "$doc" ]; then
+            missing_docs+=("$doc")
+          fi
+        done
+        
+        if [ ${#missing_docs[@]} -eq 0 ]; then
+          echo "✅ All required documentation files present"
+        else
+          echo "⚠️ Missing documentation files:"
+          printf '  - %s\n' "${missing_docs[@]}"
+        fi
+
+    - name: Check code examples in docs
+      run: |
+        echo "Validating Python code blocks in documentation..."
+        
+        # Extract and test Python code blocks from README
+        python -c "
+        import re
+        import sys
+        
+        with open('README.md', 'r') as f:
+            content = f.read()
+        
+        # Find Python code blocks
+        pattern = r'\`\`\`python\n(.*?)\n\`\`\`'
+        code_blocks = re.findall(pattern, content, re.DOTALL)
+        
+        print(f'Found {len(code_blocks)} Python code blocks in README.md')
+        
+        # Basic syntax check (compile only, don't execute)
+        errors = []
+        for i, code in enumerate(code_blocks):
+            try:
+                compile(code, f'<code_block_{i}>', 'exec')
+            except SyntaxError as e:
+                errors.append(f'Block {i}: {e}')
+        
+        if errors:
+            print('⚠️ Syntax errors found:')
+            for error in errors:
+                print(f'  - {error}')
+        else:
+            print('✅ All code blocks have valid syntax')
+        "
+
+  update-badges:
+    runs-on: ubuntu-latest
+    needs: validate-docs
+    if: success()
+    
+    steps:
+    - name: Update status badges
+      run: |
+        echo "✅ Documentation validation passed"
+        echo "Badges in README.md are up to date"

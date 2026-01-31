@@ -1,8 +1,8 @@
 import torch
 import pytest
-from qcmd_ecs.core.manifold import project_to_tangent_space, retract_to_manifold, sym
-from qcmd_ecs.core.dynamics import run_reverse_diffusion
-from qcmd_ecs.core.types import DTYPE, StiefelManifold
+from core.qcmd_ecs.core.manifold import project_to_tangent_space, retract_to_manifold, sym
+from core.qcmd_ecs.core.dynamics import run_reverse_diffusion
+from core.qcmd_ecs.core.types import DTYPE, StiefelManifold
 
 # Ensure all computations are done in float64 for numerical stability
 torch.set_default_dtype(torch.float64)

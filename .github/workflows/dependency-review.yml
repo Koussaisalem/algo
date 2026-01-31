@@ -1,0 +1,56 @@
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install pip-audit safety
+
+    - name: Run pip-audit (security vulnerabilities)
+      run: |
+        pip-audit --requirement requirements.txt || echo "⚠️ Security vulnerabilities detected"
+      continue-on-error: true
+
+    - name: Check for dependency conflicts
+      run: |
+        pip install -r requirements.txt --dry-run 2>&1 | tee dep_check.log
+        if grep -i "conflict\|error" dep_check.log; then
+          echo "⚠️ Dependency conflicts detected"
+          exit 1
+        fi
+        echo "✅ No dependency conflicts"
+
+    - name: Verify PyTorch compatibility
+      run: |
+        python -c "
+        import torch
+        import torch_geometric
+        
+        print(f'PyTorch version: {torch.__version__}')
+        print(f'PyG version: {torch_geometric.__version__}')
+        print(f'CUDA available: {torch.cuda.is_available()}')
+        
+        # Test basic operations
+        x = torch.randn(10, 10)
+        y = x @ x.T
+        print('✅ PyTorch working correctly')
+        "

@@ -5,17 +5,23 @@
 ### *AI-driven discovery of materials with exotic quantum properties*
 
 <p>
-  <a href="https://github.com/Koussaisalem/algo/actions">
-    <img src="https://img.shields.io/badge/tests-passing-brightgreen?style=for-the-badge&logo=github" alt="Tests"/>
+  <a href="https://github.com/Koussaisalem/algo/actions/workflows/test.yml">
+    <img src="https://github.com/Koussaisalem/algo/actions/workflows/test.yml/badge.svg" alt="Tests"/>
+  </a>
+  <a href="https://github.com/Koussaisalem/algo/actions/workflows/benchmark.yml">
+    <img src="https://github.com/Koussaisalem/algo/actions/workflows/benchmark.yml/badge.svg" alt="Benchmarks"/>
+  </a>
+  <a href="https://codecov.io/gh/Koussaisalem/algo">
+    <img src="https://codecov.io/gh/Koussaisalem/algo/branch/main/graph/badge.svg" alt="Coverage"/>
   </a>
   <a href="https://github.com/Koussaisalem/algo/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-Proprietary-red.svg?style=for-the-badge" alt="License: Proprietary"/>
+    <img src="https://img.shields.io/badge/license-Proprietary-red.svg" alt="License: Proprietary"/>
   </a>
   <a href="https://www.python.org">
-    <img src="https://img.shields.io/badge/python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+    <img src="https://img.shields.io/badge/python-3.10+-blue?logo=python&logoColor=white" alt="Python"/>
   </a>
   <a href="https://github.com/Koussaisalem/algo/stargazers">
-    <img src="https://img.shields.io/github/stars/Koussaisalem/algo?style=for-the-badge&logo=github&color=yellow" alt="Stars"/>
+    <img src="https://img.shields.io/github/stars/Koussaisalem/algo?logo=github&color=yellow" alt="Stars"/>
   </a>
 </p>
 

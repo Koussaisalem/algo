@@ -201,3 +201,7 @@ __pycache__/
 tmp/
 temp/
 *.tmp
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
