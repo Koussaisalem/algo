@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased bg-[#0a0a0f]`}>
         <ClientProviders>
-          <div className="min-h-screen bg-[#0a0a0f] bg-grid">
+          <div className="min-h-screen relative z-10">
             {children}
           </div>
         </ClientProviders>

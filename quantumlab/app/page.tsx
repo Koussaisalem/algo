@@ -1,11 +1,22 @@
+'use client';
+
 import Link from "next/link"
 import { ArrowRight, Atom, Cpu, LineChart, FlaskConical, Layers, ChevronRight, Sparkles, Zap, Shield } from "lucide-react"
+import { MoleculeBackground, FloatingOrbs, GridPattern } from "@/components/ui/animated-background"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-black">
+    <main className="relative min-h-screen">
+      {/* Animated Background */}
+      <div className="fixed inset-0 z-0 bg-[#050508]">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-transparent to-purple-950/20" />
+        <GridPattern />
+        <FloatingOrbs />
+        <MoleculeBackground particleCount={60} connectionDistance={140} speed={0.4} />
+      </div>
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-2xl border-b border-white/[0.06]">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-1.5 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
@@ -37,11 +48,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-32 px-6 overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-full blur-3xl opacity-50" />
-        </div>
+      <section className="relative pt-40 pb-32 px-6 overflow-hidden z-10">
         
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
@@ -83,7 +90,7 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-32 px-6 relative">
+      <section className="py-32 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl font-semibold text-white mb-5 tracking-tight">Complete Discovery Pipeline</h2>
@@ -140,7 +147,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 z-10 relative">
         <div className="max-w-5xl mx-auto">
           <div className="glass rounded-3xl p-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
@@ -154,7 +161,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 z-10 relative">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
             <Shield className="w-3.5 h-3.5 text-emerald-400" />
@@ -177,7 +184,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-10 px-6 border-t border-white/[0.06]">
+      <footer className="py-10 px-6 border-t border-white/[0.06] z-10 relative">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="p-1.5 rounded-lg bg-white/5">
