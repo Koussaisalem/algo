@@ -10,7 +10,7 @@ rdkit==2025.3.6
 numpy==1.26.4
 
 # Testing
-pytest==8.4.2
+pytest==9.0.2
 pytest-cov==6.0.0
 pytest-xdist==3.6.1
 pytest-timeout==2.2.0
