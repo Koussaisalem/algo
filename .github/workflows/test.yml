@@ -33,19 +33,35 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install torch==2.5.1 -f https://download.pytorch.org/whl/cpu/torch_stable.html
-        pip install -r requirements.txt
+        pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install pytest pytest-cov pytest-xdist pytest-timeout
+
+    - name: Verify structure
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Directory structure:"
+        ls -la
+        echo "Core structure:"
+        ls -la core/ || echo "No core directory"
+        echo "Tests location:"
+        find . -name "test_*.py" -type f | grep -v __pycache__ || echo "No tests found"
 
     - name: Run core tests
       run: |
-        pytest core/qcmd_ecs/tests/ -v --cov=core/qcmd_ecs/core --cov-report=xml --cov-report=term --timeout=300
+        if [ -d "core/qcmd_ecs/tests" ]; then
+          pytest core/qcmd_ecs/tests/ -v --cov=core/qcmd_ecs/core --cov-report=xml --cov-report=term --timeout=300
+        else
+          echo "ERROR: Test directory not found"
+          exit 1
+        fi
       continue-on-error: false
 
     - name: Test imports
       run: |
-        python -c "from core.qcmd_ecs.core import manifold, dynamics, types; print('✓ Core imports successful')"
-        python -c "from core.models import score_model, surrogate; print('✓ Model imports successful')"
+        python -c "from core.qcmd_ecs.core import manifold, dynamics, types; print('Core imports successful')"
+        python -c "from core.models import score_model, surrogate; print('Model imports successful')"
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
@@ -94,7 +110,7 @@ jobs:
         # Verify orthonormality
         eye_k = torch.eye(k, dtype=DTYPE)
         assert torch.allclose(U_new.T @ U_new, eye_k, atol=1e-9)
-        print('✓ Manifold operations validated')
+        print('Manifold operations validated')
         "
 
     - name: Test dynamics pipeline
@@ -125,7 +141,7 @@ jobs:
         )
         
         assert 'samples' in results
-        print('✓ Diffusion pipeline validated')
+        print('Diffusion pipeline validated')
         "
 
   style-check:
@@ -146,15 +162,27 @@ jobs:
 
     - name: Check code formatting (Black)
       run: |
-        black --check core/ --line-length 100 || echo "⚠️ Code formatting issues detected"
+        if [ -d "core" ]; then
+          black --check core/ --line-length 100 || echo "Code formatting issues detected"
+        else
+          echo "Skipping: core directory not found"
+        fi
       continue-on-error: true
 
     - name: Check import sorting (isort)
       run: |
-        isort --check-only core/ --profile black || echo "⚠️ Import sorting issues detected"
+        if [ -d "core" ]; then
+          isort --check-only core/ --profile black || echo "Import sorting issues detected"
+        else
+          echo "Skipping: core directory not found"
+        fi
       continue-on-error: true
 
     - name: Lint with flake8
       run: |
-        flake8 core/ --max-line-length=100 --extend-ignore=E203,E501,W503 --count || echo "⚠️ Linting issues detected"
+        if [ -d "core" ]; then
+          flake8 core/ --max-line-length=100 --extend-ignore=E203,E501,W503 --count || echo "Linting issues detected"
+        else
+          echo "Skipping: core directory not found"
+        fi
       continue-on-error: true
