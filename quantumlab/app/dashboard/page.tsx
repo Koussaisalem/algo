@@ -4,16 +4,24 @@ import { useEffect, useState } from 'react'
 import Link from "next/link"
 import { 
   Atom, Upload, Cpu, FlaskConical, LineChart, Settings, Plus, ArrowUpRight, 
-  Clock, ChevronRight, CheckCircle2, Activity, Sparkles, TrendingUp
+  Clock, ChevronRight, CheckCircle2, Activity, Sparkles, TrendingUp, Command, Zap,
+  Layers, Target, BarChart3
 } from "lucide-react"
 import { useAppStore } from '@/lib/store'
 import { jobQueue, Job } from '@/lib/job-queue'
+import { BarChart, DonutChart, ProgressRing } from '@/components/ui/charts'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Tooltip } from '@/components/ui/tooltip'
+import { Kbd } from '@/components/ui/kbd'
 
 export default function DashboardPage() {
   const { datasets, models, results } = useAppStore()
   const [jobs, setJobs] = useState<Job[]>([])
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const updateJobs = () => setJobs(jobQueue.getAllJobs())
     updateJobs()
     const interval = setInterval(updateJobs, 1000)
@@ -22,6 +30,25 @@ export default function DashboardPage() {
 
   const runningJobs = jobs.filter(j => j.status === 'running').length
   const trainingModels = models.filter(m => m.status === 'training').length
+  
+  // Chart data
+  const activityData = [
+    { label: 'Mon', value: 12 },
+    { label: 'Tue', value: 19 },
+    { label: 'Wed', value: 8 },
+    { label: 'Thu', value: 25 },
+    { label: 'Fri', value: 18 },
+    { label: 'Sat', value: 7 },
+    { label: 'Sun', value: 14 },
+  ]
+
+  const statusData = [
+    { label: 'Completed', value: jobs.filter(j => j.status === 'completed').length + 5, color: '#10b981' },
+    { label: 'Running', value: runningJobs + 2, color: '#3b82f6' },
+    { label: 'Queued', value: jobs.filter(j => j.status === 'queued').length + 1, color: '#f59e0b' },
+  ]
+
+  if (!mounted) return null
 
   return (
     <div className="min-h-screen bg-black">
