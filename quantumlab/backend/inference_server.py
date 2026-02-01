@@ -20,10 +20,14 @@ sys.path.insert(0, str(PROJECT_ROOT / "core"))
 sys.path.insert(0, str(PROJECT_ROOT / "core/qcmd_ecs"))
 sys.path.insert(0, str(PROJECT_ROOT / "projects/phononic-discovery/framework"))
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel
 import uvicorn
+
+# Import database
+from database import db
 
 # Try to import the actual models
 try:
@@ -578,6 +582,191 @@ async def generate_molecules(request: GenerationRequest):
 async def get_elements():
     """Get available elements and their properties."""
     return {"elements": ELEMENT_DATA}
+
+# ----- Library Management Endpoints -----
+
+class SaveMoleculeRequest(BaseModel):
+    molecule_id: str
+    molecule_data: Dict[str, Any]
+    metadata: Optional[Dict[str, Any]] = None
+    tags: Optional[List[str]] = None
+    notes: Optional[str] = None
+
+class SearchRequest(BaseModel):
+    formula: Optional[str] = None
+    elements: Optional[List[str]] = None
+    min_band_gap: Optional[float] = None
+    max_band_gap: Optional[float] = None
+    favorite_only: bool = False
+    limit: int = 100
+    offset: int = 0
+
+class DatasetCreateRequest(BaseModel):
+    name: str
+    description: str = ""
+
+class DatasetAddRequest(BaseModel):
+    dataset_id: int
+    molecule_id: str
+
+@app.post("/library/save")
+async def save_molecule_to_library(request: SaveMoleculeRequest):
+    """Save a molecule to the library."""
+    try:
+        molecule_id = db.save_molecule(request.molecule_data, request.metadata)
+        
+        # Update tags and notes if provided
+        if request.tags:
+            db.update_molecule_tags(molecule_id, request.tags)
+        
+        if request.notes:
+            from sqlite3 import connect
+            with db.get_connection() as conn:
+                conn.execute(
+                    "UPDATE molecules SET notes = ? WHERE molecule_id = ?",
+                    (request.notes, molecule_id)
+                )
+        
+        return {
+            "success": True,
+            "molecule_id": molecule_id,
+            "message": "Molecule saved successfully"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/library/molecule/{molecule_id}")
+async def get_molecule_from_library(molecule_id: str):
+    """Get a molecule from the library."""
+    molecule = db.get_molecule(molecule_id)
+    if not molecule:
+        raise HTTPException(status_code=404, detail="Molecule not found")
+    return molecule
+
+@app.post("/library/search")
+async def search_library(request: SearchRequest):
+    """Search molecules in the library."""
+    try:
+        results = db.search_molecules(
+            formula=request.formula,
+            elements=request.elements,
+            min_band_gap=request.min_band_gap,
+            max_band_gap=request.max_band_gap,
+            favorite_only=request.favorite_only,
+            limit=request.limit,
+            offset=request.offset
+        )
+        return {
+            "success": True,
+            "count": len(results),
+            "molecules": results
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/library/favorite/{molecule_id}")
+async def toggle_favorite(molecule_id: str):
+    """Toggle favorite status of a molecule."""
+    try:
+        new_status = db.toggle_favorite(molecule_id)
+        return {
+            "success": True,
+            "molecule_id": molecule_id,
+            "favorite": new_status
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/library/molecule/{molecule_id}")
+async def delete_molecule_from_library(molecule_id: str):
+    """Delete a molecule from the library."""
+    try:
+        db.delete_molecule(molecule_id)
+        return {
+            "success": True,
+            "message": "Molecule deleted successfully"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/library/stats")
+async def get_library_statistics():
+    """Get library statistics."""
+    try:
+        stats = db.get_statistics()
+        return {
+            "success": True,
+            "statistics": stats
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ----- Dataset Management -----
+
+@app.post("/datasets/create")
+async def create_dataset(request: DatasetCreateRequest):
+    """Create a new dataset."""
+    try:
+        dataset_id = db.create_dataset(request.name, request.description)
+        return {
+            "success": True,
+            "dataset_id": dataset_id,
+            "message": "Dataset created successfully"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/datasets/add")
+async def add_to_dataset(request: DatasetAddRequest):
+    """Add molecule to dataset."""
+    try:
+        db.add_to_dataset(request.dataset_id, request.molecule_id)
+        return {
+            "success": True,
+            "message": "Molecule added to dataset"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/datasets/{dataset_id}/export")
+async def export_dataset(dataset_id: int, format: str = Query("xyz", regex="^(xyz|json)$")):
+    """Export dataset in specified format."""
+    try:
+        content = db.export_dataset(dataset_id, format)
+        
+        if format == "xyz":
+            return StreamingResponse(
+                iter([content]),
+                media_type="chemical/x-xyz",
+                headers={
+                    "Content-Disposition": f"attachment; filename=dataset_{dataset_id}.xyz"
+                }
+            )
+        else:  # json
+            return StreamingResponse(
+                iter([content]),
+                media_type="application/json",
+                headers={
+                    "Content-Disposition": f"attachment; filename=dataset_{dataset_id}.json"
+                }
+            )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/datasets/list")
+async def list_datasets():
+    """List all datasets."""
+    try:
+        with db.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM datasets ORDER BY created_at DESC")
+            datasets = [dict(row) for row in cursor.fetchall()]
+        return {
+            "success": True,
+            "datasets": datasets
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # ----- Main -----
 
