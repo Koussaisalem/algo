@@ -5,7 +5,7 @@ import Link from "next/link"
 import { 
   Atom, Upload, Cpu, FlaskConical, LineChart, Settings, Plus, ArrowUpRight, 
   Clock, ChevronRight, CheckCircle2, Activity, Sparkles, TrendingUp, Command, Zap,
-  Layers, Target, BarChart3, Wand2
+  Layers, Target, BarChart3, Wand2, Package, Cloud
 } from "lucide-react"
 import { useAppStore } from '@/lib/store'
 import { jobQueue, Job } from '@/lib/job-queue'
@@ -86,6 +86,8 @@ export default function DashboardPage() {
           <NavItem href="/datasets" icon={<Layers className="w-4 h-4" />} label="Datasets" badge={datasets.length.toString()} />
           <NavItem href="/models" icon={<Cpu className="w-4 h-4" />} label="Models" badge={models.length.toString()} />
           <NavItem href="/inference" icon={<Wand2 className="w-4 h-4" />} label="Generate" highlight />
+          <NavItem href="/library" icon={<Package className="w-4 h-4" />} label="Library" />
+          <NavItem href="/cloud" icon={<Cloud className="w-4 h-4" />} label="Cloud Training" />
           <NavItem href="/compute" icon={<Zap className="w-4 h-4" />} label="Compute" badge={runningJobs > 0 ? `${runningJobs}` : undefined} />
           <NavItem href="/results" icon={<Target className="w-4 h-4" />} label="Results" badge={results.length.toString()} />
         </nav>

@@ -9,6 +9,8 @@ import sys
 import json
 import torch
 import numpy as np
+import paramiko
+import asyncio
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 from dataclasses import dataclass
@@ -20,14 +22,15 @@ sys.path.insert(0, str(PROJECT_ROOT / "core"))
 sys.path.insert(0, str(PROJECT_ROOT / "core/qcmd_ecs"))
 sys.path.insert(0, str(PROJECT_ROOT / "projects/phononic-discovery/framework"))
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel
 import uvicorn
 
-# Import database
+# Import database and vault
 from database import db
+from vault import vault
 
 # Try to import the actual models
 try:
@@ -767,6 +770,331 @@ async def list_datasets():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# ----- Cloud Training & VM Management -----
+
+class SSHCredentialRequest(BaseModel):
+    name: str
+    host: str
+    username: str
+    auth_type: str  # 'password' or 'key'
+    password: Optional[str] = None
+    private_key: Optional[str] = None
+    passphrase: Optional[str] = None
+    port: int = 22
+    tags: Optional[List[str]] = None
+
+class VMRegisterRequest(BaseModel):
+    name: str
+    provider: str  # 'aws', 'gcp', 'azure', 'custom'
+    instance_type: str
+    ssh_credential_id: Optional[int] = None
+    instance_id: Optional[str] = None
+    region: Optional[str] = None
+    public_ip: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None
+
+class TrainingSessionRequest(BaseModel):
+    name: str
+    vm_instance_id: int
+    model_type: str  # 'score', 'surrogate', 'nequip'
+    dataset_path: Optional[str] = None
+    config: Optional[Dict[str, Any]] = None
+
+@app.post("/cloud/credentials/ssh")
+async def save_ssh_credential(request: SSHCredentialRequest):
+    """Save SSH credentials to secure vault."""
+    try:
+        cred_id = vault.save_ssh_credential(
+            name=request.name,
+            host=request.host,
+            username=request.username,
+            auth_type=request.auth_type,
+            password=request.password,
+            private_key=request.private_key,
+            passphrase=request.passphrase,
+            port=request.port,
+            tags=request.tags
+        )
+        return {
+            "success": True,
+            "credential_id": cred_id,
+            "message": "SSH credentials saved securely"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/cloud/credentials/ssh")
+async def list_ssh_credentials():
+    """List all SSH credentials (without sensitive data)."""
+    try:
+        credentials = vault.list_ssh_credentials()
+        return {
+            "success": True,
+            "credentials": credentials
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/cloud/credentials/ssh/{credential_id}")
+async def get_ssh_credential(credential_id: int):
+    """Get SSH credentials (for establishing connection)."""
+    try:
+        credential = vault.get_ssh_credential(credential_id)
+        if not credential:
+            raise HTTPException(status_code=404, detail="Credential not found")
+        return {
+            "success": True,
+            "credential": credential
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/cloud/credentials/ssh/{credential_id}")
+async def delete_ssh_credential(credential_id: int):
+    """Delete SSH credentials."""
+    try:
+        vault.delete_ssh_credential(credential_id)
+        return {
+            "success": True,
+            "message": "Credential deleted successfully"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/cloud/vms/register")
+async def register_vm(request: VMRegisterRequest):
+    """Register a VM instance."""
+    try:
+        vm_id = vault.register_vm(
+            name=request.name,
+            provider=request.provider,
+            instance_type=request.instance_type,
+            ssh_credential_id=request.ssh_credential_id,
+            instance_id=request.instance_id,
+            region=request.region,
+            public_ip=request.public_ip,
+            metadata=request.metadata
+        )
+        return {
+            "success": True,
+            "vm_id": vm_id,
+            "message": "VM registered successfully"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/cloud/vms")
+async def list_vms(status: Optional[str] = None):
+    """List all VM instances."""
+    try:
+        vms = vault.list_vms(status=status)
+        return {
+            "success": True,
+            "vms": vms
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/cloud/vms/{vm_id}")
+async def get_vm(vm_id: int):
+    """Get VM instance details."""
+    try:
+        vm = vault.get_vm(vm_id)
+        if not vm:
+            raise HTTPException(status_code=404, detail="VM not found")
+        return {
+            "success": True,
+            "vm": vm
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/cloud/vms/{vm_id}/status")
+async def update_vm_status(vm_id: int, status: str, public_ip: Optional[str] = None):
+    """Update VM status."""
+    try:
+        vault.update_vm_status(vm_id, status, public_ip)
+        return {
+            "success": True,
+            "message": "VM status updated"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/cloud/training/create")
+async def create_training_session(request: TrainingSessionRequest):
+    """Create a new training session."""
+    try:
+        session_id = vault.create_training_session(
+            name=request.name,
+            vm_instance_id=request.vm_instance_id,
+            model_type=request.model_type,
+            dataset_path=request.dataset_path
+        )
+        return {
+            "success": True,
+            "session_id": session_id,
+            "message": "Training session created"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/cloud/training")
+async def list_training_sessions(vm_id: Optional[int] = None):
+    """List training sessions."""
+    try:
+        sessions = vault.list_training_sessions(vm_id=vm_id)
+        return {
+            "success": True,
+            "sessions": sessions
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/cloud/training/{session_id}")
+async def get_training_session(session_id: int):
+    """Get training session details."""
+    try:
+        session = vault.get_training_session(session_id)
+        if not session:
+            raise HTTPException(status_code=404, detail="Session not found")
+        return {
+            "success": True,
+            "session": session
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/cloud/training/{session_id}/update")
+async def update_training_session(
+    session_id: int,
+    status: Optional[str] = None,
+    progress: Optional[float] = None,
+    logs: Optional[str] = None
+):
+    """Update training session progress."""
+    try:
+        vault.update_training_session(session_id, status, progress, logs)
+        return {
+            "success": True,
+            "message": "Training session updated"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# WebSocket for real-time SSH terminal
+@app.websocket("/cloud/ssh/{vm_id}/terminal")
+async def ssh_terminal(websocket: WebSocket, vm_id: int):
+    """WebSocket endpoint for web-based SSH terminal."""
+    await websocket.accept()
+    ssh_client = None
+    ssh_channel = None
+    
+    try:
+        # Get VM and credentials
+        vm = vault.get_vm(vm_id)
+        if not vm or not vm.get('ssh_credential_id'):
+            await websocket.send_json({"error": "VM or credentials not found"})
+            await websocket.close()
+            return
+        
+        credential = vault.get_ssh_credential(vm['ssh_credential_id'])
+        if not credential:
+            await websocket.send_json({"error": "SSH credentials not found"})
+            await websocket.close()
+            return
+        
+        # Create SSH client
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        
+        # Connect using password or key
+        connect_params = {
+            'hostname': credential['host'],
+            'port': credential['port'],
+            'username': credential['username'],
+            'timeout': 10
+        }
+        
+        if credential.get('password'):
+            connect_params['password'] = credential['password']
+        elif credential.get('private_key'):
+            from io import StringIO
+            key_file = StringIO(credential['private_key'])
+            pkey = paramiko.RSAKey.from_private_key(
+                key_file,
+                password=credential.get('passphrase')
+            )
+            connect_params['pkey'] = pkey
+        
+        ssh_client.connect(**connect_params)
+        
+        # Get interactive shell
+        ssh_channel = ssh_client.invoke_shell(term='xterm', width=120, height=40)
+        ssh_channel.settimeout(0.1)
+        
+        await websocket.send_json({
+            "type": "connected",
+            "message": f"Connected to {credential['host']}:{credential['port']}"
+        })
+        
+        # Create tasks for bidirectional communication
+        async def read_from_ssh():
+            """Read SSH output and send to WebSocket"""
+            while True:
+                try:
+                    if ssh_channel.recv_ready():
+                        data = ssh_channel.recv(4096).decode('utf-8', errors='replace')
+                        await websocket.send_json({
+                            "type": "output",
+                            "data": data
+                        })
+                    await asyncio.sleep(0.01)
+                except Exception as e:
+                    print(f"SSH read error: {e}")
+                    break
+        
+        async def write_to_ssh():
+            """Read from WebSocket and send to SSH"""
+            while True:
+                try:
+                    data = await websocket.receive_text()
+                    if ssh_channel:
+                        ssh_channel.send(data)
+                except WebSocketDisconnect:
+                    break
+                except Exception as e:
+                    print(f"SSH write error: {e}")
+                    break
+        
+        # Run both tasks concurrently
+        await asyncio.gather(
+            read_from_ssh(),
+            write_to_ssh(),
+            return_exceptions=True
+        )
+        
+    except paramiko.AuthenticationException:
+        await websocket.send_json({"error": "Authentication failed"})
+    except paramiko.SSHException as e:
+        await websocket.send_json({"error": f"SSH error: {str(e)}"})
+    except WebSocketDisconnect:
+        print(f"WebSocket disconnected for VM {vm_id}")
+    except Exception as e:
+        try:
+            await websocket.send_json({"error": f"Connection error: {str(e)}"})
+        except:
+            pass
+    finally:
+        if ssh_channel:
+            ssh_channel.close()
+        if ssh_client:
+            ssh_client.close()
+        try:
+            await websocket.close()
+        except:
+            pass
 
 # ----- Main -----
 

@@ -19,6 +19,7 @@ import {
   Info,
   FlaskConical,
   Maximize2,
+  Star,
 } from 'lucide-react';
 
 // Types
@@ -166,6 +167,33 @@ export default function InferencePage() {
     navigator.clipboard.writeText(molecule.xyz_content);
     setCopiedId(molecule.id);
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const saveToLibrary = async (molecule: GeneratedMolecule) => {
+    try {
+      const response = await fetch('http://localhost:8000/library/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          molecule_id: molecule.id,
+          molecule_data: molecule,
+          metadata: {
+            temperature: params.temperature,
+            num_diffusion_steps: params.numDiffusionSteps,
+            guidance_strength: params.guidanceStrength,
+          }
+        }),
+      });
+      
+      if (response.ok) {
+        alert(`✓ ${molecule.formula} saved to library!`);
+      } else {
+        alert('Failed to save molecule');
+      }
+    } catch (error) {
+      console.error('Failed to save molecule:', error);
+      alert('Error saving molecule to library');
+    }
   };
 
   const toggleElement = (element: string) => {
@@ -461,6 +489,13 @@ export default function InferencePage() {
                           title="Download XYZ"
                         >
                           <Download className="w-4 h-4 text-gray-400" />
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); saveToLibrary(mol); }}
+                          className="p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+                          title="Save to Library"
+                        >
+                          <Star className="w-4 h-4 text-gray-400" />
                         </button>
                       </div>
                     </div>
