@@ -15,8 +15,15 @@ import {
   CircleDot,
   Box,
   Copy,
-  ExternalLink
+  ExternalLink,
+  RotateCcw
 } from 'lucide-react'
+import { MoleculeViewer } from '@/components/ui/molecule-viewer'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { useToast } from '@/components/providers/toast-provider'
 
 interface Result {
   id: string
@@ -95,46 +102,17 @@ function AtomBadge({ element }: { element: string }) {
   )
 }
 
-function Molecule3DPlaceholder({ atoms }: { atoms: { element: string; position: number[] }[] }) {
+function Molecule3DViewer({ atoms }: { atoms: { element: string; position: number[] }[] }) {
+  const viewerAtoms = atoms.map(a => ({
+    element: a.element,
+    x: a.position[0],
+    y: a.position[1],
+    z: a.position[2],
+  }))
+
   return (
-    <div className="relative h-64 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden border border-white/10">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative w-40 h-40">
-          {atoms.slice(0, 8).map((atom, i) => {
-            const angle = (i / 8) * Math.PI * 2
-            const radius = 50 + (i % 2) * 20
-            const x = Math.cos(angle) * radius + 80
-            const y = Math.sin(angle) * radius + 80
-            const colors: Record<string, string> = {
-              Cr: '#3B82F6',
-              Cu: '#F97316',
-              Se: '#22C55E',
-              Mo: '#8B5CF6',
-              S: '#EAB308',
-            }
-            
-            return (
-              <div
-                key={i}
-                className="absolute w-6 h-6 rounded-full shadow-lg animate-pulse"
-                style={{
-                  left: x,
-                  top: y,
-                  backgroundColor: colors[atom.element] || '#6B7280',
-                  animationDelay: `${i * 0.1}s`,
-                  boxShadow: `0 0 20px ${colors[atom.element] || '#6B7280'}50`,
-                }}
-              />
-            )
-          })}
-        </div>
-      </div>
-      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
-        <span className="text-xs text-gray-400">Interactive 3D viewer</span>
-        <button className="text-xs text-blue-400 hover:text-blue-300 transition-colors">
-          Open fullscreen
-        </button>
-      </div>
+    <div className="h-72 rounded-2xl overflow-hidden border border-white/10">
+      <MoleculeViewer atoms={viewerAtoms} className="w-full h-full" />
     </div>
   )
 }
@@ -251,7 +229,7 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
           {/* 3D Structure */}
           <div>
             <h2 className="text-lg font-medium text-white mb-4">Crystal Structure</h2>
-            <Molecule3DPlaceholder atoms={result.structure.atoms} />
+            <Molecule3DViewer atoms={result.structure.atoms} />
             <div className="mt-4 flex items-center gap-2">
               <span className="text-sm text-gray-400">Atoms:</span>
               <div className="flex gap-1">
