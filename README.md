@@ -5,32 +5,32 @@
 ### *AI-driven discovery of materials with exotic quantum properties*
 
 <p>
-  <a href="https://github.com/Koussaisalem/algo/actions/workflows/test.yml">
-    <img src="https://github.com/Koussaisalem/algo/actions/workflows/test.yml/badge.svg" alt="Tests"/>
-  </a>
-  <a href="https://github.com/Koussaisalem/algo/actions/workflows/benchmark.yml">
-    <img src="https://github.com/Koussaisalem/algo/actions/workflows/benchmark.yml/badge.svg" alt="Benchmarks"/>
-  </a>
-  <a href="https://codecov.io/gh/Koussaisalem/algo">
-    <img src="https://codecov.io/gh/Koussaisalem/algo/branch/main/graph/badge.svg" alt="Coverage"/>
-  </a>
-  <a href="https://github.com/Koussaisalem/algo/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-Proprietary-red.svg" alt="License: Proprietary"/>
-  </a>
-  <a href="https://www.python.org">
-    <img src="https://img.shields.io/badge/python-3.10+-blue?logo=python&logoColor=white" alt="Python"/>
-  </a>
-  <a href="https://github.com/Koussaisalem/algo/stargazers">
-    <img src="https://img.shields.io/github/stars/Koussaisalem/algo?logo=github&color=yellow" alt="Stars"/>
-  </a>
+ <a href="https://github.com/Koussaisalem/algo/actions/workflows/test.yml">
+ <img src="https://github.com/Koussaisalem/algo/actions/workflows/test.yml/badge.svg" alt="Tests"/>
+ </a>
+ <a href="https://github.com/Koussaisalem/algo/actions/workflows/benchmark.yml">
+ <img src="https://github.com/Koussaisalem/algo/actions/workflows/benchmark.yml/badge.svg" alt="Benchmarks"/>
+ </a>
+ <a href="https://codecov.io/gh/Koussaisalem/algo">
+ <img src="https://codecov.io/gh/Koussaisalem/algo/branch/main/graph/badge.svg" alt="Coverage"/>
+ </a>
+ <a href="https://github.com/Koussaisalem/algo/blob/main/LICENSE">
+ <img src="https://img.shields.io/badge/license-Proprietary-red.svg" alt="License: Proprietary"/>
+ </a>
+ <a href="https://www.python.org">
+ <img src="https://img.shields.io/badge/python-3.10+-blue?logo=python&logoColor=white" alt="Python"/>
+ </a>
+ <a href="https://github.com/Koussaisalem/algo/stargazers">
+ <img src="https://img.shields.io/github/stars/Koussaisalem/algo?logo=github&color=yellow" alt="Stars"/>
+ </a>
 </p>
 
 <p>
-  <a href="#overview">Overview</a> •
-  <a href="#recent-discoveries">Discoveries</a> •
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#documentation">Documentation</a> •
-  <a href="#citation">Citation</a>
+ <a href="#overview">Overview</a> •
+ <a href="#recent-discoveries">Discoveries</a> •
+ <a href="#quick-start">Quick Start</a> •
+ <a href="#documentation">Documentation</a> •
+ <a href="#citation">Citation</a>
 </p>
 
 </div>
@@ -42,40 +42,40 @@
 This repository contains a unified platform for discovering novel quantum materials through AI-driven generative modeling, DFT validation, and synthesis planning. The platform combines manifold-constrained diffusion models with high-throughput computational screening to identify materials with exotic properties.
 
 **Key Features:**
-- 🎯 Manifold-constrained generative models (Stiefel manifold diffusion)
-- 🔬 Multi-scale validation pipeline (xTB → DFT → phonons)
-- 🧪 Synthesis protocol design (MBE temperature screening)
-- 📊 Advanced benchmarking and analysis tools
-- 🤝 Collaboration-ready documentation and workflows
+- Manifold-constrained generative models (Stiefel manifold diffusion)
+- Multi-scale validation pipeline (xTB → DFT → phonons)
+- Synthesis protocol design (MBE temperature screening)
+- Advanced benchmarking and analysis tools
+- Collaboration-ready documentation and workflows
 
 ### Platform Workflow
 
 ```mermaid
 graph LR
-    A[📊 Data Preparation<br/>QM9 Dataset] --> B[⚡ xTB Enrichment<br/>Formation Energies]
-    B --> C[🧠 Surrogate Training<br/>GNN Energy Model]
-    C --> D[🎨 Generative Sampling<br/>Stiefel Manifold Diffusion]
-    D --> E[🔬 DFT Validation<br/>GPAW Calculations]
-    E --> F[📈 Property Analysis<br/>Band Structure & Phonons]
-    F --> G[🧪 Synthesis Design<br/>MBE Temperature Screening]
-    
-    style A fill:#1a5490,stroke:#58a6ff,stroke-width:2px,color:#fff
-    style B fill:#7d4e00,stroke:#d29922,stroke-width:2px,color:#fff
-    style C fill:#6e3a8a,stroke:#bc8cff,stroke-width:2px,color:#fff
-    style D fill:#0d5e2a,stroke:#3fb950,stroke-width:2px,color:#fff
-    style E fill:#7d4e00,stroke:#d29922,stroke-width:2px,color:#fff
-    style F fill:#8b2252,stroke:#f778ba,stroke-width:2px,color:#fff
-    style G fill:#0d5e5e,stroke:#39c5bb,stroke-width:2px,color:#fff
+ A[ Data Preparation<br/>QM9 Dataset] --> B[ xTB Enrichment<br/>Formation Energies]
+ B --> C[ Surrogate Training<br/>GNN Energy Model]
+ C --> D[ Generative Sampling<br/>Stiefel Manifold Diffusion]
+ D --> E[ DFT Validation<br/>GPAW Calculations]
+ E --> F[ Property Analysis<br/>Band Structure & Phonons]
+ F --> G[ Synthesis Design<br/>MBE Temperature Screening]
+ 
+ style A fill:#1a5490,stroke:#58a6ff,stroke-width:2px,color:#fff
+ style B fill:#7d4e00,stroke:#d29922,stroke-width:2px,color:#fff
+ style C fill:#6e3a8a,stroke:#bc8cff,stroke-width:2px,color:#fff
+ style D fill:#0d5e2a,stroke:#3fb950,stroke-width:2px,color:#fff
+ style E fill:#7d4e00,stroke:#d29922,stroke-width:2px,color:#fff
+ style F fill:#8b2252,stroke:#f778ba,stroke-width:2px,color:#fff
+ style G fill:#0d5e5e,stroke:#39c5bb,stroke-width:2px,color:#fff
 ```
 
-**Result:** ✨ **CrCuSe₂ discovered** - First hetero-metallic TMD with validated 0.616 eV bandgap
+**Result:****CrCuSe₂ discovered** - First hetero-metallic TMD with validated 0.616 eV bandgap
 
 ---
 
 ## Recent Discoveries
 
 <details open>
-<summary><b>🔬 CrCuSe₂ - Hetero-Metallic 2D Semiconductor</b></summary>
+<summary><b> CrCuSe₂ - Hetero-Metallic 2D Semiconductor</b></summary>
 
 <br>
 
@@ -87,27 +87,27 @@ graph LR
 
 ```mermaid
 graph TB
-    subgraph "P 1 Space Group"
-        Cr[Cr - Chromium<br/>Magnetic center]
-        Cu[Cu - Copper<br/>Metallic bonding]
-        Se1[Se - Selenium<br/>Layer 1]
-        Se2[Se - Selenium<br/>Layer 2]
-        
-        Cr -.-> Cu
-        Cu -.-> Se1
-        Cu -.-> Se2
-        Cr -.-> Se1
-        Cr -.-> Se2
-    end
-    
-    style Cr fill:#da3633,stroke:#f85149,stroke-width:2px,color:#fff
-    style Cu fill:#1f6feb,stroke:#58a6ff,stroke-width:2px,color:#fff
-    style Se1 fill:#9e6a03,stroke:#d29922,stroke-width:2px,color:#fff
-    style Se2 fill:#9e6a03,stroke:#d29922,stroke-width:2px,color:#fff
+ subgraph "P 1 Space Group"
+ Cr[Cr - Chromium<br/>Magnetic center]
+ Cu[Cu - Copper<br/>Metallic bonding]
+ Se1[Se - Selenium<br/>Layer 1]
+ Se2[Se - Selenium<br/>Layer 2]
+ 
+ Cr -.-> Cu
+ Cu -.-> Se1
+ Cu -.-> Se2
+ Cr -.-> Se1
+ Cr -.-> Se2
+ end
+ 
+ style Cr fill:#da3633,stroke:#f85149,stroke-width:2px,color:#fff
+ style Cu fill:#1f6feb,stroke:#58a6ff,stroke-width:2px,color:#fff
+ style Se1 fill:#9e6a03,stroke:#d29922,stroke-width:2px,color:#fff
+ style Se2 fill:#9e6a03,stroke:#d29922,stroke-width:2px,color:#fff
 ```
 
-**Lattice:** 2D layered TMD  
-**Formula:** CrCuSe₂  
+**Lattice:** 2D layered TMD 
+**Formula:** CrCuSe₂ 
 **Space Group:** P 1 (triclinic)
 
 </td>
@@ -128,19 +128,19 @@ graph TB
 
 ```mermaid
 graph LR
-    A[MoS₂<br/>1.8 eV] -.->|"Too wide"| B[CrCuSe₂<br/>0.616 eV<br/>⭐ IDEAL]
-    B -.->|"Too narrow"| C[Graphene<br/>0 eV]
-    
-    style A fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
-    style B fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
-    style C fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
+ A[MoS₂<br/>1.8 eV] -.->|"Too wide"| B[CrCuSe₂<br/>0.616 eV<br/>IDEAL]
+ B -.->|"Too narrow"| C[Graphene<br/>0 eV]
+ 
+ style A fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
+ style B fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
+ style C fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
 ```
 
 </td>
 </tr>
 </table>
 
-**Status:** ✅ Ready for experimental validation • [Full Discovery Report →](docs/discoveries/CrCuSe2/DISCOVERY.md)
+**Status:** Ready for experimental validation • [Full Discovery Report →](docs/discoveries/CrCuSe2/DISCOVERY.md)
 
 </details>
 
@@ -150,46 +150,46 @@ graph LR
 
 ```
 algo/
-├── core/                          # 🏗️ Shared infrastructure
-│   ├── qcmd_ecs/                 # Stiefel manifold framework (mathematically verified)
-│   │   ├── manifold.py           # ⭐ Tangent projection & QR retraction (1e-9 tolerance)
-│   │   ├── dynamics.py           # ⭐ Reverse diffusion sampler (Langevin MCMC)
-│   │   └── types.py              # Float64 precision constants
-│   ├── models/                   # 🧠 Neural architectures
-│   │   ├── score_model.py        # ⭐ Denoising score prediction (SchNetPack GNN)
-│   │   ├── surrogate.py          # ⭐ Energy predictor (E3-equivariant)
-│   │   └── tmd_surrogate.py      # TMD-specific fine-tuned model
-│   └── legacy_models/            # Original implementations (preserved)
-│
-├── projects/                     # 🔬 Research projects
-│   └── phononic-discovery/       # Active: Phononic analog gravity
-│       ├── scripts/              # 📜 End-to-end pipeline (01→06)
-│       │   ├── 01_prepare_data.py           # QM9 subset extraction
-│       │   ├── 02_enrich_dataset.py         # xTB formation energies
-│       │   ├── 03_train_surrogate.py        # GNN surrogate training
-│       │   ├── 05_advanced_benchmark.py     # Manifold vs Euclidean
-│       │   └── analyze_enriched_dataset.py  # Visualization & stats
-│       ├── dft_validation/       # 🔬 GPAW DFT workflow
-│       │   ├── run_gpaw_validation.py       # Band structure calculator
-│       │   └── phonon_dispersion.py         # Phonon band structure
-│       ├── synthesis_lab/        # 🧪 MBE protocol design
-│       │   └── temperature_screening/       # AIMD temperature sweep
-│       └── results/              # 📊 Generated structures & analysis
-│           ├── advanced_benchmark/          # Performance metrics
-│           └── demo_benchmark/              # Quick validation
-│
-└── docs/                         # 📚 Documentation
-    ├── architecture/             # System design & technical specs
-    │   └── OVERVIEW.md           # High-level architecture diagram
-    ├── discoveries/              # Material discovery reports
-    │   └── CrCuSe2/
-    │       └── DISCOVERY.md      # ⭐ Complete discovery documentation
-    └── guides/                   # User & developer guides
-        └── README_STYLING_OPTIONS.md  # Professional README tips
+ core/ # Shared infrastructure
+ qcmd_ecs/ # Stiefel manifold framework (mathematically verified)
+ manifold.py # Tangent projection & QR retraction (1e-9 tolerance)
+ dynamics.py # Reverse diffusion sampler (Langevin MCMC)
+ types.py # Float64 precision constants
+ models/ # Neural architectures
+ score_model.py # Denoising score prediction (SchNetPack GNN)
+ surrogate.py # Energy predictor (E3-equivariant)
+ tmd_surrogate.py # TMD-specific fine-tuned model
+ legacy_models/ # Original implementations (preserved)
+
+ projects/ # Research projects
+ phononic-discovery/ # Active: Phononic analog gravity
+ scripts/ # End-to-end pipeline (01→06)
+ 01_prepare_data.py # QM9 subset extraction
+ 02_enrich_dataset.py # xTB formation energies
+ 03_train_surrogate.py # GNN surrogate training
+ 05_advanced_benchmark.py # Manifold vs Euclidean
+ analyze_enriched_dataset.py # Visualization & stats
+ dft_validation/ # GPAW DFT workflow
+ run_gpaw_validation.py # Band structure calculator
+ phonon_dispersion.py # Phonon band structure
+ synthesis_lab/ # MBE protocol design
+ temperature_screening/ # AIMD temperature sweep
+ results/ # Generated structures & analysis
+ advanced_benchmark/ # Performance metrics
+ demo_benchmark/ # Quick validation
+
+ docs/ # Documentation
+ architecture/ # System design & technical specs
+ OVERVIEW.md # High-level architecture diagram
+ discoveries/ # Material discovery reports
+ CrCuSe2/
+ DISCOVERY.md # Complete discovery documentation
+ guides/ # User & developer guides
+ README_STYLING_OPTIONS.md # Professional README tips
 ```
 
-**Legend:**  
-⭐ = Core innovation | 🏗️ = Infrastructure | 🧠 = ML models | 🔬 = Validation | 🧪 = Synthesis | 📊 = Results
+**Legend:** 
+ = Core innovation | = Infrastructure | = ML models | = Validation | = Synthesis | = Results
 
 ---
 
@@ -230,15 +230,15 @@ python 03_train_surrogate.py
 # 4. Run advanced benchmarks
 python 05_advanced_benchmark.py
 
-# 5. 🎉 Visualize results (generates plots in results/)
+# 5. Visualize results (generates plots in results/)
 python analyze_enriched_dataset.py
 ```
 
 **Expected Output:**
-- ✅ Trained surrogate model → `../models/surrogate/surrogate_state_dict.pt`
-- ✅ Benchmark metrics → `../results/advanced_benchmark/summary.json`
-- ✅ Performance plots → `../results/advanced_benchmark/report.md`
-- 🎯 Manifold advantage: **2.3x better** stability vs Euclidean baseline
+- Trained surrogate model → `../models/surrogate/surrogate_state_dict.pt`
+- Benchmark metrics → `../results/advanced_benchmark/summary.json`
+- Performance plots → `../results/advanced_benchmark/report.md`
+- Manifold advantage: **2.3x better** stability vs Euclidean baseline
 
 ---
 
@@ -246,11 +246,11 @@ python analyze_enriched_dataset.py
 
 ### Stiefel Manifold Diffusion
 
-**The Mathematical Heart** 💎
+**The Mathematical Heart** 
 
 The core engine implements **Quantum-Constrained Manifold Diffusion with Energy-Consistent Score (QCMD-ECS)** - a paradigm shift from *learning physics* to *respecting it by construction*.
 
-📖 **[Read the Complete Mathematical Theory](docs/theory/STIEFEL_MANIFOLD_THEORY.md)** ← Your best work!
+ **[Read the Complete Mathematical Theory](docs/theory/STIEFEL_MANIFOLD_THEORY.md)** ← Your best work!
 
 The algorithm operates on the Stiefel manifold $\mathrm{St}(m,k)$ for generating molecular orbital configurations:
 
@@ -260,24 +260,24 @@ from core.qcmd_ecs.core.manifold import project_to_tangent_space, retract_to_man
 
 # Define score and energy models
 def score_fn(t: int, U: Tensor) -> Tensor:
-    return score_model(U, t)
+ return score_model(U, t)
 
 def energy_fn(U: Tensor) -> Tensor:
-    return surrogate_model(U)
+ return surrogate_model(U)
 
 # Run diffusion sampling
 samples = run_reverse_diffusion(
-    score_fn=score_fn,
-    energy_fn=energy_fn,
-    num_steps=1000,
-    shape=(num_atoms, 3),
-    beta_schedule='cosine'
+ score_fn=score_fn,
+ energy_fn=energy_fn,
+ num_steps=1000,
+ shape=(num_atoms, 3),
+ beta_schedule='cosine'
 )
 ```
 
 ### Key Theoretical Innovations
 
-🏆 **Manifold-Adjusted Energy-Consistent Score (MAECS)**:
+ **Manifold-Adjusted Energy-Consistent Score (MAECS)**:
 $$\mathcal{S}_{\mathrm{MAE}}(\mathcal{X}_t, t) = \Pi_{\mathcal{T}_{\mathbf{U}}}\big(s_{\theta}(\mathcal{X}_t,t) + \gamma(t)\,\nabla \widehat{E}_\phi(\mathcal{X}_t)\big)$$
 
 Where:
@@ -304,9 +304,9 @@ Where:
 **Objective:** Discover materials with Dirac/Weyl phonon band structures for analog gravity experiments
 
 **Status:** Active discovery phase
-- ✅ CrCuSe₂ discovered and validated
+- CrCuSe₂ discovered and validated
 - ⏳ Temperature screening via AIMD
-- 📝 Collaboration proposal for Université Le Mans
+- Collaboration proposal for Université Le Mans
 
 **Read more:** [Project README](projects/phononic-discovery/README.md)
 
@@ -324,7 +324,7 @@ Where:
 ## Visual Showcase
 
 <details>
-<summary><b>📊 Platform Performance Metrics</b></summary>
+<summary><b> Platform Performance Metrics</b></summary>
 
 <br>
 
@@ -334,20 +334,20 @@ The Stiefel manifold constraint provides **2.3x better stability** compared to u
 
 ```mermaid
 graph TB
-    subgraph "Stability Score (Lower = Better)"
-        E1[Euclidean Baseline<br/>Score: 2.3]
-        S1[Stiefel Manifold<br/>Score: 1.0<br/>⭐ 2.3x Better]
-    end
-    
-    subgraph "Orthonormality Error"
-        E2[Euclidean Baseline<br/>Error: 1e-3]
-        S2[Stiefel Manifold<br/>Error: 1e-9<br/>⭐ 10^6x Better]
-    end
-    
-    style E1 fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
-    style S1 fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
-    style E2 fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
-    style S2 fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
+ subgraph "Stability Score (Lower = Better)"
+ E1[Euclidean Baseline<br/>Score: 2.3]
+ S1[Stiefel Manifold<br/>Score: 1.0<br/>2.3x Better]
+ end
+ 
+ subgraph "Orthonormality Error"
+ E2[Euclidean Baseline<br/>Error: 1e-3]
+ S2[Stiefel Manifold<br/>Error: 1e-9<br/>10^6x Better]
+ end
+ 
+ style E1 fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
+ style S1 fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
+ style E2 fill:#6e1a1a,stroke:#f85149,stroke-width:2px,color:#fff
+ style S2 fill:#0d5e2a,stroke:#3fb950,stroke-width:3px,color:#fff
 ```
 
 ### Discovery Success Rate
@@ -363,11 +363,11 @@ graph TB
 
 ```mermaid
 pie title "Computational Budget Distribution"
-    "Data Preparation" : 5
-    "Surrogate Training" : 15
-    "Generative Sampling" : 10
-    "DFT Validation" : 60
-    "Analysis & Docs" : 10
+ "Data Preparation" : 5
+ "Surrogate Training" : 15
+ "Generative Sampling" : 10
+ "DFT Validation" : 60
+ "Analysis & Docs" : 10
 ```
 
 **Key Insight:** DFT validation is the bottleneck → Surrogate models provide 1000x speedup
@@ -378,19 +378,19 @@ pie title "Computational Budget Distribution"
 
 ## Documentation
 
-### 📚 Available Documentation
+### Available Documentation
 
 | Document | Description | Status |
 |----------|-------------|--------|
-| 💎 [**Stiefel Manifold Theory**](docs/theory/STIEFEL_MANIFOLD_THEORY.md) | **Complete mathematical foundation (QCMD-ECS)** | ⭐ **Crown Jewel** |
-| 🎯 [**Scripts Reference**](docs/guides/SCRIPTS_REFERENCE.md) | **Quick reference for all training scripts** | ⭐ **Essential** |
-| [Architecture Overview](docs/architecture/OVERVIEW.md) | System design & technical specs | ✅ Complete |
-| [CrCuSe₂ Discovery Report](docs/discoveries/CrCuSe2/DISCOVERY.md) | Comprehensive discovery documentation | ✅ Complete |
-| [README Styling Guide](docs/guides/README_STYLING_OPTIONS.md) | Professional README formatting options | ✅ Complete |
-| [Phononic Discovery Project](projects/phononic-discovery/README.md) | Project-specific guide | ✅ Complete |
-| [Restructure Summary](RESTRUCTURE_SUMMARY.md) | Repository transformation log | ✅ Complete |
+| [**Stiefel Manifold Theory**](docs/theory/STIEFEL_MANIFOLD_THEORY.md) | **Complete mathematical foundation (QCMD-ECS)** | **Crown Jewel** |
+| [**Scripts Reference**](docs/guides/SCRIPTS_REFERENCE.md) | **Quick reference for all training scripts** | **Essential** |
+| [Architecture Overview](docs/architecture/OVERVIEW.md) | System design & technical specs | Complete |
+| [CrCuSe₂ Discovery Report](docs/discoveries/CrCuSe2/DISCOVERY.md) | Comprehensive discovery documentation | Complete |
+| [README Styling Guide](docs/guides/README_STYLING_OPTIONS.md) | Professional README formatting options | Complete |
+| [Phononic Discovery Project](projects/phononic-discovery/README.md) | Project-specific guide | Complete |
+| [Restructure Summary](RESTRUCTURE_SUMMARY.md) | Repository transformation log | Complete |
 
-### 🔧 Developer Resources
+### Developer Resources
 
 - **Core Framework:** See `core/qcmd_ecs/` for manifold operations
 - **Models:** See `core/models/` for neural architectures
@@ -405,10 +405,10 @@ If you use this platform in your research, please cite:
 
 ```bibtex
 @software{qcmd_platform_2025,
-  title = {Quantum Materials Discovery Platform},
-  author = {Koussai Salem},
-  year = {2025},
-  url = {https://github.com/Koussaisalem/algo}
+ title = {Quantum Materials Discovery Platform},
+ author = {Koussai Salem},
+ year = {2025},
+ url = {https://github.com/Koussaisalem/algo}
 }
 ```
 
@@ -416,10 +416,10 @@ For the CrCuSe₂ discovery:
 
 ```bibtex
 @article{crcuse2_discovery_2025,
-  title = {AI-Driven Discovery of CrCuSe₂: A Hetero-Metallic 2D Semiconductor},
-  author = {Koussai Salem},
-  journal = {In preparation},
-  year = {2025}
+ title = {AI-Driven Discovery of CrCuSe₂: A Hetero-Metallic 2D Semiconductor},
+ author = {Koussai Salem},
+ journal = {In preparation},
+ year = {2025}
 }
 ```
 
@@ -456,5 +456,5 @@ This project is proprietary and confidential software - see the [LICENSE](LICENS
 ---
 
 <div align="center">
-  <sub>Built with ❤️ for the quantum materials community</sub>
+ <sub>Built with for the quantum materials community</sub>
 </div>
