@@ -17,6 +17,7 @@ from datetime import datetime
 # Add project paths
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "core"))
+sys.path.insert(0, str(PROJECT_ROOT / "core/qcmd_ecs"))
 sys.path.insert(0, str(PROJECT_ROOT / "projects/phononic-discovery/framework"))
 
 from fastapi import FastAPI, HTTPException
@@ -26,13 +27,22 @@ import uvicorn
 
 # Try to import the actual models
 try:
-    from qcmd_ecs.core.dynamics import run_reverse_diffusion
-    from qcmd_ecs.core.manifold import retract_to_manifold
-    from qcmd_ecs.core.types import DTYPE
+    from core.dynamics import run_reverse_diffusion
+    from core.manifold import retract_to_manifold, project_to_tangent_space
+    from core.types import DTYPE
     MODELS_AVAILABLE = True
-except ImportError:
-    MODELS_AVAILABLE = False
-    print("Warning: QCMD-ECS core not available, using mock generation")
+    print("✓ QCMD-ECS core loaded successfully")
+except ImportError as e:
+    print(f"Warning: QCMD-ECS core not available: {e}")
+    try:
+        from qcmd_ecs.core.dynamics import run_reverse_diffusion
+        from qcmd_ecs.core.manifold import retract_to_manifold, project_to_tangent_space
+        from qcmd_ecs.core.types import DTYPE
+        MODELS_AVAILABLE = True
+        print("✓ QCMD-ECS core loaded successfully (alternate path)")
+    except ImportError as e2:
+        MODELS_AVAILABLE = False
+        print(f"Warning: QCMD-ECS core not available: {e2}, using mock generation")
 
 app = FastAPI(
     title="QuantumLab Inference API",
@@ -176,7 +186,8 @@ def generate_molecule_coordinates(
     num_atoms: int,
     element_types: List[str],
     temperature: float = 1.0,
-    seed: Optional[int] = None
+    seed: Optional[int] = None,
+    num_diffusion_steps: int = 100
 ) -> Dict[str, Any]:
     """Generate molecular coordinates using diffusion or mock data."""
     
@@ -190,36 +201,74 @@ def generate_molecule_coordinates(
     if MODELS_AVAILABLE:
         # Use actual diffusion model
         try:
-            # Initialize random positions on manifold
+            print(f"Running QCMD-ECS diffusion for {num_atoms} atoms...")
+            
+            # Initialize random positions on Stiefel manifold
+            # For molecular generation, we use a 3D orbital representation
             U_T = torch.randn(num_atoms, 3, dtype=DTYPE)
+            
+            # Project to manifold (orthonormalize)
             U_T = retract_to_manifold(U_T)
             
-            # Simple schedules for demo
-            def gamma_schedule(t): return 0.1 * (t / 100)
-            def eta_schedule(t): return 0.01
-            def tau_schedule(t): return 0.1 * np.sqrt(t / 100)
+            # Define schedules for diffusion
+            def gamma_schedule(t):
+                """Energy guidance weight schedule."""
+                # Linear increase for energy guidance
+                return 0.05 * (1.0 - t / num_diffusion_steps)
             
-            # Mock score/energy models for now
-            def score_model(U, t): return -0.01 * U
-            def energy_model(U): return -0.005 * U
+            def eta_schedule(t):
+                """Step size schedule."""
+                # Constant step size
+                return 0.01
             
-            # Run diffusion
+            def tau_schedule(t):
+                """Noise schedule."""
+                # Decrease noise as we approach t=0
+                return 0.1 * np.sqrt(t / num_diffusion_steps) * temperature
+            
+            # Simple score model (learned gradient)
+            def score_model(U, t):
+                """Mock score model - returns tangent vector pointing toward equilibrium."""
+                # In real version, this would call the trained neural network
+                # For now, use a simple energy-based gradient
+                score = -0.02 * U  # Attract to center
+                # Add some noise for variety
+                noise = torch.randn_like(U) * 0.01
+                return project_to_tangent_space(U, score + noise)
+            
+            # Simple energy model
+            def energy_gradient_model(U):
+                """Mock energy gradient - stabilizes toward compact configurations."""
+                # In real version, this would call the trained surrogate model
+                # Simple repulsion from high-energy unstable states
+                grad = -0.01 * U
+                return project_to_tangent_space(U, grad)
+            
+            # Run reverse diffusion
             U_0 = run_reverse_diffusion(
                 U_T=U_T,
                 score_model=score_model,
-                energy_gradient_model=energy_model,
+                energy_gradient_model=energy_gradient_model,
                 gamma_schedule=gamma_schedule,
                 eta_schedule=eta_schedule,
                 tau_schedule=tau_schedule,
-                num_steps=50,
+                num_steps=num_diffusion_steps,
                 seed=seed or 42
             )
             
-            # Scale to reasonable molecular distances (Angstroms)
-            positions = U_0.numpy() * 2.0
+            # Convert manifold positions to molecular coordinates
+            # Scale to reasonable molecular distances (1-3 Angstroms)
+            positions = U_0.cpu().numpy() * 2.5
+            
+            # Add inter-molecular forces to separate atoms naturally
+            positions = apply_molecular_forces(positions, elements)
+            
+            print(f"✓ Diffusion completed: generated {num_atoms} atoms")
             
         except Exception as e:
-            print(f"Diffusion failed, using fallback: {e}")
+            print(f"Diffusion failed: {e}, using geometric fallback")
+            import traceback
+            traceback.print_exc()
             positions = generate_mock_positions(num_atoms, temperature)
     else:
         positions = generate_mock_positions(num_atoms, temperature)
@@ -309,6 +358,43 @@ def generate_mock_positions(num_atoms: int, temperature: float) -> np.ndarray:
             ])
     
     return np.array(positions)
+
+def apply_molecular_forces(positions: np.ndarray, elements: np.ndarray) -> np.ndarray:
+    """Apply simple molecular forces to adjust positions to realistic bonding."""
+    positions = positions.copy()
+    
+    # Simple force-based relaxation
+    for _ in range(10):  # Iterations
+        forces = np.zeros_like(positions)
+        
+        for i in range(len(positions)):
+            for j in range(i + 1, len(positions)):
+                # Vector between atoms
+                r_vec = positions[j] - positions[i]
+                r_dist = np.linalg.norm(r_vec)
+                
+                if r_dist < 1e-6:
+                    continue
+                
+                r_hat = r_vec / r_dist
+                
+                # Get element radii
+                r_i = ELEMENT_DATA.get(elements[i], {}).get("radius", 1.0)
+                r_j = ELEMENT_DATA.get(elements[j], {}).get("radius", 1.0)
+                equilibrium_dist = (r_i + r_j) * 0.8
+                
+                # Lennard-Jones-like potential
+                if r_dist < equilibrium_dist * 2:
+                    force_mag = 0.1 * ((equilibrium_dist / r_dist)**6 - (equilibrium_dist / r_dist)**3)
+                    force = force_mag * r_hat
+                    
+                    forces[i] -= force
+                    forces[j] += force
+        
+        # Update positions
+        positions += forces * 0.1
+    
+    return positions
 
 def infer_bonds(atoms: List[Dict]) -> List[Dict]:
     """Infer chemical bonds based on atomic distances."""
@@ -408,7 +494,8 @@ async def generate_molecules(request: GenerationRequest):
                 num_atoms=request.num_atoms,
                 element_types=request.element_types,
                 temperature=request.temperature,
-                seed=base_seed + i
+                seed=base_seed + i,
+                num_diffusion_steps=request.num_diffusion_steps
             )
             
             molecules.append(MoleculeStructure(
@@ -448,10 +535,13 @@ if __name__ == "__main__":
     print("Starting QuantumLab Inference Server...")
     print(f"Project root: {PROJECT_ROOT}")
     print(f"Models available: {MODELS_AVAILABLE}")
+    print(f"Server will run at: http://localhost:8000")
+    print(f"API docs at: http://localhost:8000/docs")
     
     uvicorn.run(
-        app,
+        "inference_server:app",
         host="0.0.0.0",
         port=8000,
-        reload=True,
+        reload=False,
+        log_level="info"
     )
