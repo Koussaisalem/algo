@@ -5,7 +5,7 @@ import Link from "next/link"
 import { 
   Atom, Upload, Cpu, FlaskConical, LineChart, Settings, Plus, ArrowUpRight, 
   Clock, ChevronRight, CheckCircle2, Activity, Sparkles, TrendingUp, Command, Zap,
-  Layers, Target, BarChart3
+  Layers, Target, BarChart3, Wand2
 } from "lucide-react"
 import { useAppStore } from '@/lib/store'
 import { jobQueue, Job } from '@/lib/job-queue'
