@@ -2,7 +2,7 @@
 
 # Core tensor + GNN stack
 torch==2.5.1
-torch-geometric==2.6.1
+torch-geometric==2.7.0
 nequip==0.15.0
 
 # Chemistry + numerical tooling
