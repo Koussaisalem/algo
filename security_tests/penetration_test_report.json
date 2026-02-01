@@ -1,0 +1,59 @@
+{
+  "successful_attacks": [
+    {
+      "attack": "SQL injection possible (6 succeeded)",
+      "exploited": true
+    },
+    {
+      "attack": "SQL injection vulnerabilities found",
+      "exploited": true
+    },
+    {
+      "attack": "Command injection possible",
+      "exploited": true
+    },
+    {
+      "attack": "No rate limiting - DDoS possible",
+      "exploited": true
+    },
+    {
+      "attack": "Authentication bypass possible",
+      "exploited": true
+    },
+    {
+      "attack": "Missing headers: X-Frame-Options, X-Content-Type-Options, Content-Security-Policy, Referrer-Policy",
+      "exploited": true
+    }
+  ],
+  "blocked_attacks": [
+    {
+      "attack": "XSS attempts blocked (5/5)",
+      "blocked": true
+    },
+    {
+      "attack": "All path traversal attempts blocked",
+      "blocked": true
+    },
+    {
+      "attack": "SSH keys not accessible via API",
+      "blocked": true
+    },
+    {
+      "attack": "Database files not accessible via API",
+      "blocked": true
+    },
+    {
+      "attack": "No sensitive data exposed in API responses",
+      "blocked": true
+    }
+  ],
+  "vulnerabilities_found": [
+    "SQL injection possible (6 succeeded)",
+    "SQL injection vulnerabilities found",
+    "Command injection possible",
+    "No rate limiting - DDoS possible",
+    "Authentication bypass possible",
+    "Missing headers: X-Frame-Options, X-Content-Type-Options, Content-Security-Policy, Referrer-Policy"
+  ],
+  "security_score": 40
+}
