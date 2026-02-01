@@ -1,78 +1,195 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, Zap, Database } from "lucide-react"
+import { ArrowRight, Atom, Cpu, LineChart, FlaskConical, Layers, ChevronRight, Sparkles, Zap, Shield } from "lucide-react"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden">
-      {/* Hero Section */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
-        {/* Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute -bottom-1/2 -right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-4000"></div>
+    <main className="relative min-h-screen bg-black">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-2xl border-b border-white/[0.06]">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+              <Atom className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-lg font-semibold text-white tracking-tight">QuantumLab</span>
+          </div>
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="/dashboard" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Dashboard
+            </Link>
+            <Link href="/datasets" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Datasets
+            </Link>
+            <Link href="/models" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Models
+            </Link>
+            <Link href="/docs" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Docs
+            </Link>
+          </div>
+          <Link 
+            href="/dashboard"
+            className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-gray-100 transition-all"
+          >
+            Launch App
+          </Link>
         </div>
+      </nav>
 
-        {/* Content */}
-        <div className="relative z-20 text-center max-w-5xl mx-auto">
-          {/* Logo/Badge */}
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 animate-fade-in">
-            <Sparkles className="w-4 h-4 text-blue-400" />
-            <span className="text-sm font-medium text-gray-300">
+      {/* Hero Section */}
+      <section className="relative pt-40 pb-32 px-6 overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-full blur-3xl opacity-50" />
+        </div>
+        
+        <div className="max-w-5xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
+            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+            <span className="text-xs font-medium text-gray-300">
               Powered by Stiefel Manifold Diffusion
             </span>
           </div>
 
-          {/* Main Heading */}
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 animate-slide-up">
-            <span className="text-gradient">QuantumLab</span>
+          <h1 className="text-6xl md:text-8xl font-semibold text-white mb-8 tracking-tight leading-[0.9]">
+            Quantum Materials
+            <br />
+            <span className="text-gradient">
+              Discovery Platform
+            </span>
           </h1>
 
-          <p className="text-xl sm:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto animate-slide-up animation-delay-200">
-            Discover Novel Quantum Materials with AI
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+            A professional-grade platform for end-to-end materials discovery. 
+            Combine generative AI with quantum chemistry.
           </p>
 
-          <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto animate-slide-up animation-delay-400">
-            End-to-end platform for materials discovery combining generative AI,
-            quantum chemistry, and intuitive visualization
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-slide-up animation-delay-600">
-            <Link href="/dashboard">
-              <Button size="lg" className="glass-button text-lg group">
-                Get Started
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link 
+              href="/dashboard"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full text-base font-medium hover:bg-gray-100 transition-all btn-shine"
+            >
+              Open Dashboard
+              <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/docs">
-              <Button size="lg" variant="outline" className="glass-button text-lg">
-                Documentation
-              </Button>
+            <Link 
+              href="/docs"
+              className="inline-flex items-center gap-2 px-8 py-4 glass rounded-full text-base font-medium text-white hover:bg-white/[0.08] transition-all"
+            >
+              Read Documentation
             </Link>
           </div>
+        </div>
+      </section>
 
-          {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animate-slide-up animation-delay-800">
+      {/* Features Grid */}
+      <section className="py-32 px-6 relative">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-semibold text-white mb-5 tracking-tight">Complete Discovery Pipeline</h2>
+            <p className="text-lg text-gray-500 max-w-xl mx-auto font-light">
+              Everything you need to go from raw data to validated discoveries
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <FeatureCard
-              icon={<Database className="w-8 h-8 text-blue-400" />}
-              title="Custom Datasets"
-              description="Upload and manage your molecular datasets with ease"
+              icon={<Layers className="w-5 h-5" />}
+              title="Dataset Management"
+              description="Upload, organize, and preprocess molecular datasets with built-in validation"
+              href="/datasets"
+              color="blue"
             />
             <FeatureCard
-              icon={<Zap className="w-8 h-8 text-purple-400" />}
-              title="AI Models"
-              description="Train custom generative models with your data"
+              icon={<Cpu className="w-5 h-5" />}
+              title="Model Training"
+              description="Train custom generative and surrogate models with real-time monitoring"
+              href="/models"
+              color="purple"
             />
             <FeatureCard
-              icon={<Sparkles className="w-8 h-8 text-pink-400" />}
-              title="DFT Validation"
-              description="Validate discoveries with xTB or full DFT calculations"
+              icon={<FlaskConical className="w-5 h-5" />}
+              title="DFT Computation"
+              description="Run xTB or full DFT calculations with configurable parameters"
+              href="/compute"
+              color="emerald"
+            />
+            <FeatureCard
+              icon={<Atom className="w-5 h-5" />}
+              title="Structure Generation"
+              description="Generate novel molecular structures using manifold diffusion"
+              href="/compute"
+              color="amber"
+            />
+            <FeatureCard
+              icon={<LineChart className="w-5 h-5" />}
+              title="Results Analysis"
+              description="Visualize and analyze results with interactive charts and 3D viewers"
+              href="/results"
+              color="rose"
+            />
+            <FeatureCard
+              icon={<Zap className="w-5 h-5" />}
+              title="Pipeline Automation"
+              description="Chain workflows together for fully automated discovery pipelines"
+              href="/compute"
+              color="cyan"
             />
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="glass rounded-3xl p-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+              <StatCard value="95%" label="Valid Structures" />
+              <StatCard value="1000x" label="Faster than DFT" />
+              <StatCard value="87%" label="xTB Convergence" />
+              <StatCard value="34%" label="DFT Stability" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
+            <Shield className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="text-xs font-medium text-gray-300">
+              Research-grade validation
+            </span>
+          </div>
+          <h2 className="text-4xl font-semibold text-white mb-5 tracking-tight">Ready to discover?</h2>
+          <p className="text-lg text-gray-500 mb-10 font-light">
+            Start exploring the platform and accelerate your materials research
+          </p>
+          <Link 
+            href="/dashboard"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full text-base font-medium hover:bg-gray-100 transition-all btn-shine"
+          >
+            Get Started
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-10 px-6 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 rounded-lg bg-white/5">
+              <Atom className="w-4 h-4 text-gray-500" />
+            </div>
+            <span className="text-sm text-gray-500 font-medium">QuantumLab</span>
+          </div>
+          <p className="text-sm text-gray-600">
+            Part of the Quantum Materials Discovery Platform
+          </p>
+        </div>
+      </footer>
     </main>
   )
 }
@@ -81,20 +198,51 @@ function FeatureCard({
   icon,
   title,
   description,
+  href,
+  color,
 }: {
   icon: React.ReactNode
   title: string
   description: string
+  href: string
+  color: string
 }) {
+  const colors: Record<string, string> = {
+    blue: "from-blue-500/20 to-blue-600/10 border-blue-500/20 group-hover:border-blue-500/40",
+    purple: "from-purple-500/20 to-purple-600/10 border-purple-500/20 group-hover:border-purple-500/40",
+    emerald: "from-emerald-500/20 to-emerald-600/10 border-emerald-500/20 group-hover:border-emerald-500/40",
+    amber: "from-amber-500/20 to-amber-600/10 border-amber-500/20 group-hover:border-amber-500/40",
+    rose: "from-rose-500/20 to-rose-600/10 border-rose-500/20 group-hover:border-rose-500/40",
+    cyan: "from-cyan-500/20 to-cyan-600/10 border-cyan-500/20 group-hover:border-cyan-500/40",
+  }
+  
+  const iconColors: Record<string, string> = {
+    blue: "text-blue-400",
+    purple: "text-purple-400",
+    emerald: "text-emerald-400",
+    amber: "text-amber-400",
+    rose: "text-rose-400",
+    cyan: "text-cyan-400",
+  }
+  
   return (
-    <div className="glass-card p-6 hover:scale-105 transition-transform duration-300 cursor-pointer group">
-      <div className="flex flex-col items-center text-center">
-        <div className="mb-4 p-3 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-colors">
-          {icon}
+    <Link href={href}>
+      <div className="group p-6 rounded-2xl glass card-hover h-full">
+        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${colors[color]} border flex items-center justify-center mb-5 transition-colors`}>
+          <span className={iconColors[color]}>{icon}</span>
         </div>
-        <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-        <p className="text-sm text-gray-400">{description}</p>
+        <h3 className="text-lg font-medium text-white mb-2">{title}</h3>
+        <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
       </div>
+    </Link>
+  )
+}
+
+function StatCard({ value, label }: { value: string; label: string }) {
+  return (
+    <div>
+      <div className="text-4xl font-semibold text-white mb-2">{value}</div>
+      <div className="text-sm text-gray-500">{label}</div>
     </div>
   )
 }
