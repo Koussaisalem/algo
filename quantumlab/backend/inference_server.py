@@ -31,6 +31,7 @@ import uvicorn
 # Import database and vault
 from database import db
 from vault import vault
+from system_detect import get_system_specs, get_recommendations
 
 # Try to import the actual models
 try:
@@ -979,6 +980,51 @@ async def update_training_session(
         return {
             "success": True,
             "message": "Training session updated"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ----- System Detection Endpoints -----
+
+@app.get("/system/specs")
+async def get_specs():
+    """Get complete system specifications."""
+    try:
+        specs = get_system_specs()
+        recommendations = get_recommendations(specs)
+        return {
+            "success": True,
+            "specs": specs,
+            "recommendations": recommendations
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/system/gpus")
+async def get_gpu_info():
+    """Get GPU information only."""
+    try:
+        from system_detect import detect_gpus
+        gpus = detect_gpus()
+        return {
+            "success": True,
+            "gpus": gpus,
+            "count": len(gpus)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/system/resources")
+async def get_resource_usage():
+    """Get current resource usage (CPU, RAM, GPU)."""
+    try:
+        from system_detect import detect_cpu, detect_memory, detect_gpus
+        return {
+            "success": True,
+            "cpu": detect_cpu(),
+            "memory": detect_memory(),
+            "gpus": detect_gpus(),
+            "timestamp": datetime.now().isoformat()
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
