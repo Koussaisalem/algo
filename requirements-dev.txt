@@ -22,7 +22,7 @@ isort==5.13.2
 mypy==1.13.0
 
 # Security
-pip-audit==2.7.3
+pip-audit==2.10.0
 
 # Development utilities
 ipython==8.31.0
