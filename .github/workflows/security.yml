@@ -28,7 +28,7 @@ jobs:
 
     - name: Install security tools
       run: |
-        pip install pip-audit safety bandit semgrep
+        pip install pip-audit safety bandit
 
     - name: Run pip-audit
       run: |
