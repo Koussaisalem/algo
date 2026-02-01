@@ -1,10 +1,31 @@
 'use client';
 
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link"
 import { ArrowRight, Atom, Cpu, LineChart, FlaskConical, Layers, ChevronRight, Sparkles, Zap, Shield } from "lucide-react"
 import { MoleculeBackground, FloatingOrbs, GridPattern } from "@/components/ui/animated-background"
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  // Redirect to dashboard if already logged in
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/dashboard');
+    }
+  }, [status, router]);
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#050508]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500" />
+      </div>
+    );
+  }
+
   return (
     <main className="relative min-h-screen">
       {/* Animated Background */}
@@ -25,24 +46,21 @@ export default function Home() {
             <span className="text-lg font-semibold text-white tracking-tight">QuantumLab</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/dashboard" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Dashboard
+            <Link href="/auth/login" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Sign In
             </Link>
-            <Link href="/datasets" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Datasets
-            </Link>
-            <Link href="/models" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Models
+            <Link href="/features" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Features
             </Link>
             <Link href="/docs" className="text-sm text-gray-400 hover:text-white transition-colors">
               Docs
             </Link>
           </div>
           <Link 
-            href="/dashboard"
+            href="/auth/signup"
             className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-gray-100 transition-all"
           >
-            Launch App
+            Get Started
           </Link>
         </div>
       </nav>

@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Tooltip } from '@/components/ui/tooltip'
 import { Kbd } from '@/components/ui/kbd'
+import { UserMenu } from '@/components/UserMenu'
 
 export default function DashboardPage() {
   const { datasets, models, results } = useAppStore()
@@ -92,7 +93,8 @@ export default function DashboardPage() {
           <NavItem href="/results" icon={<Target className="w-4 h-4" />} label="Results" badge={results.length.toString()} />
         </nav>
 
-        <div className="absolute bottom-6 left-6 right-6">
+        <div className="absolute bottom-6 left-6 right-6 space-y-3">
+          <UserMenu />
           <NavItem href="/settings" icon={<Settings className="w-4 h-4" />} label="Settings" />
         </div>
       </aside>

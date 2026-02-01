@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ClientProviders } from "@/components/providers/client-providers"
+import { Providers } from "./providers"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} antialiased bg-[#0a0a0f]`}>
-        <ClientProviders>
-          <div className="min-h-screen relative z-10">
-            {children}
-          </div>
-        </ClientProviders>
+        <Providers>
+          <ClientProviders>
+            <div className="min-h-screen relative z-10">
+              {children}
+            </div>
+          </ClientProviders>
+        </Providers>
       </body>
     </html>
   )
