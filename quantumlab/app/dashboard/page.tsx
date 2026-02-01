@@ -148,12 +148,12 @@ export default function DashboardPage() {
         </div>
 
         {/* Recent Activity */}
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-6 mb-8">
           <div className="col-span-2">
             <div className="glass rounded-2xl p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-white">Recent Activity</h2>
-                <span className="text-sm text-neutral-500">Live updates</span>
+                <Badge variant="info" dot>Live</Badge>
               </div>
 
               <div className="space-y-1">
@@ -164,6 +164,7 @@ export default function DashboardPage() {
                     description={job.data?.structure || `Job ${job.id}`}
                     time={job.status === 'running' ? `${job.progress}% complete` : job.updatedAt.toLocaleTimeString()}
                     type={job.status === 'completed' ? 'success' : job.status === 'running' ? 'running' : 'error'}
+                    progress={job.status === 'running' ? job.progress : undefined}
                   />
                 ))}
                 {models.filter(m => m.status === 'training').slice(0, 1).map(model => (
@@ -212,17 +213,11 @@ export default function DashboardPage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-400">Backend</span>
-                  <span className="flex items-center gap-1.5 text-sm text-emerald-400">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Connected
-                  </span>
+                  <Badge variant="success" dot>Connected</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-400">GPU</span>
-                  <span className="flex items-center gap-1.5 text-sm text-emerald-400">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    Available
-                  </span>
+                  <Badge variant="success" dot>Available</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-400">Jobs Queue</span>
@@ -240,6 +235,23 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Charts Section */}
+        <div className="grid grid-cols-3 gap-6">
+          <div className="col-span-2">
+            <BarChart 
+              data={activityData} 
+              title="Weekly Activity" 
+              color="blue" 
+              height={180} 
+            />
+          </div>
+          <DonutChart
+            data={statusData}
+            title="Job Status"
+            size={160}
+          />
         </div>
       </main>
     </div>
@@ -297,7 +309,7 @@ function StatCard({ label, value, change, color, icon: Icon, href }: {
   )
 }
 
-function ActivityItem({ title, description, time, type }: { title: string; description: string; time: string; type: "success" | "running" | "error" }) {
+function ActivityItem({ title, description, time, type, progress }: { title: string; description: string; time: string; type: "success" | "running" | "error"; progress?: number }) {
   const icons = {
     success: <CheckCircle2 className="w-4 h-4 text-emerald-400" />,
     running: <Activity className="w-4 h-4 text-blue-400 animate-pulse" />,
@@ -305,11 +317,16 @@ function ActivityItem({ title, description, time, type }: { title: string; descr
   }
   
   return (
-    <div className="flex items-start gap-4 py-4 border-b border-white/5 last:border-0">
+    <div className="flex items-start gap-4 py-4 border-b border-white/5 last:border-0 group">
       <div className="mt-0.5">{icons[type]}</div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-white truncate">{title}</p>
         <p className="text-sm text-neutral-500 truncate">{description}</p>
+        {progress !== undefined && (
+          <div className="mt-2">
+            <Progress value={progress} size="sm" color="blue" />
+          </div>
+        )}
       </div>
       <div className="flex items-center gap-1.5 text-xs text-neutral-500 shrink-0">
         <Clock className="w-3 h-3" />
