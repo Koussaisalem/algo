@@ -1,4 +1,4 @@
-# 🚀 QuantumLab Platform - Quick Setup Guide
+# QuantumLab Platform - Quick Setup Guide
 
 ## One-Command Installation
 
@@ -12,7 +12,7 @@ That's it! Open http://localhost:3000 in your browser.
 
 ## What's Included?
 
-### ✅ Automated Setup Script (`setup.sh`)
+### Automated Setup Script (`setup.sh`)
 - Checks all dependencies (Node.js, Python, PostgreSQL)
 - Generates secure random secrets (NEXTAUTH_SECRET, POSTGRES_PASSWORD, VAULT_MASTER_KEY)
 - Creates `.env.local` configuration file
@@ -22,7 +22,7 @@ That's it! Open http://localhost:3000 in your browser.
 - Initializes database schema (users, sessions tables)
 - Creates convenient startup scripts
 
-### 🐳 Docker Compose Setup
+### Docker Compose Setup
 ```bash
 git clone https://github.com/Koussaisalem/algo.git
 cd algo/quantumlab
@@ -92,31 +92,31 @@ npm run dev
 
 ## Features
 
-### 🔬 Molecular Generation
+### Molecular Generation
 - Stiefel manifold diffusion
 - Property-guided design (band gap targeting)
 - Real-time inference with trained models
 - 3D visualization
 
-### 💾 Molecule Library
+### Molecule Library
 - Save/search/export molecules
 - SQLite database with full-text search
 - Batch operations
 - Favorite molecules
 
-### ☁️ Cloud Training
+### Cloud Training
 - VM management
 - SSH terminal (web-based)
 - Secure credential vault (Fernet encryption)
 - Training session tracking
 
-### 📊 System Monitoring
+### System Monitoring
 - Auto-detect runtime environment
 - Real-time GPU/CPU/RAM monitoring
 - Storage statistics
 - Smart recommendations
 
-### 🔐 Authentication
+### Authentication
 - NextAuth.js with PostgreSQL
 - Email/password + OAuth ready
 - Protected routes
@@ -128,8 +128,8 @@ npm run dev
 
 ### Port Already in Use
 ```bash
-lsof -ti:3000 | xargs kill -9  # Frontend
-lsof -ti:8000 | xargs kill -9  # Backend
+lsof -ti:3000 | xargs kill -9 # Frontend
+lsof -ti:8000 | xargs kill -9 # Backend
 ```
 
 ### PostgreSQL Issues
@@ -163,4 +163,4 @@ cd backend && source venv/bin/activate && pip install --upgrade -r requirements.
 - Issues: https://github.com/Koussaisalem/algo/issues
 - Discussions: https://github.com/Koussaisalem/algo/discussions
 
-**Happy molecule designing! 🧬**
+**Happy molecule designing! **

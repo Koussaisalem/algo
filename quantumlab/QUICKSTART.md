@@ -1,4 +1,4 @@
-# 🧬 QuantumLab Platform
+# QuantumLab Platform
 
 > **Quantum Chemical Molecular Design with Stiefel Manifold Optimization**
 
@@ -11,7 +11,7 @@ A cutting-edge web platform for AI-driven molecular generation with property-gui
 
 ---
 
-## 🚀 Quick Start (3 Commands)
+## Quick Start (3 Commands)
 
 ```bash
 # Clone the repository
@@ -25,11 +25,11 @@ chmod +x setup.sh && ./setup.sh
 ./start_all.sh
 ```
 
-**That's it!** 🎉 Open [http://localhost:3000](http://localhost:3000) in your browser.
+**That's it!** Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🐳 Docker Quick Start (Even Faster!)
+## Docker Quick Start (Even Faster!)
 
 ```bash
 # Clone and start with Docker Compose
@@ -51,33 +51,33 @@ Access at [http://localhost:3000](http://localhost:3000) • API at [http://loca
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔬 **Molecular Generation**
+### **Molecular Generation**
 - **Stiefel Manifold Optimization**: Mathematically rigorous geometry-preserving diffusion
 - **Property-Guided Design**: Target specific properties (band gap, energy, etc.)
 - **Real-time Inference**: Generate molecules on-demand with trained models
 - **3D Visualization**: Interactive molecule viewer with WebGL rendering
 
-### 💾 **Molecule Library**
+### **Molecule Library**
 - Save generated molecules with metadata
 - Advanced search & filtering
 - Export to SDF, MOL, XYZ formats
 - Batch operations & favorites
 
-### ☁️ **Cloud Training**
+### **Cloud Training**
 - **VM Management**: Register and manage cloud compute instances
 - **SSH Terminal**: Built-in web terminal with xterm.js
 - **Secure Vault**: Encrypted credential storage with Fernet encryption
 - **Training Sessions**: Track long-running training jobs
 
-### 📊 **System Monitoring**
+### **System Monitoring**
 - Auto-detect runtime environment (Docker/Codespace/AWS/GCP/Azure/Local)
 - Real-time GPU/CPU/RAM monitoring
 - Storage & network statistics
 - Smart resource recommendations
 
-### 🔐 **Authentication**
+### **Authentication**
 - NextAuth.js with PostgreSQL backend
 - Email/password authentication
 - OAuth ready (GitHub, Google)
@@ -85,7 +85,7 @@ Access at [http://localhost:3000](http://localhost:3000) • API at [http://loca
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 ### System Requirements
 - **OS**: Linux, macOS, or Windows (WSL2)
@@ -126,7 +126,7 @@ bcrypt@5.x
 
 ---
 
-## 🛠️ Manual Installation
+## Manual Installation
 
 If you prefer manual setup or the script doesn't work:
 
@@ -151,8 +151,8 @@ sudo apt update && sudo apt install postgresql-16
 brew install postgresql@16
 
 # Start service
-sudo service postgresql start  # Linux
-brew services start postgresql@16  # macOS
+sudo service postgresql start # Linux
+brew services start postgresql@16 # macOS
 ```
 
 ### 4. Create Database
@@ -170,7 +170,7 @@ npm install --legacy-peer-deps
 ```bash
 cd backend
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 cd ..
 ```
@@ -181,22 +181,22 @@ node -e "
 const { Pool } = require('pg');
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 (async () => {
-  await pool.query(\`
-    CREATE TABLE users (
-      id SERIAL PRIMARY KEY,
-      email VARCHAR(255) UNIQUE NOT NULL,
-      name VARCHAR(255),
-      password VARCHAR(255) NOT NULL,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-    CREATE TABLE sessions (
-      id SERIAL PRIMARY KEY,
-      user_id INTEGER REFERENCES users(id),
-      session_token VARCHAR(255) UNIQUE NOT NULL,
-      expires TIMESTAMP NOT NULL
-    );
-  \`);
-  await pool.end();
+ await pool.query(\`
+ CREATE TABLE users (
+ id SERIAL PRIMARY KEY,
+ email VARCHAR(255) UNIQUE NOT NULL,
+ name VARCHAR(255),
+ password VARCHAR(255) NOT NULL,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ );
+ CREATE TABLE sessions (
+ id SERIAL PRIMARY KEY,
+ user_id INTEGER REFERENCES users(id),
+ session_token VARCHAR(255) UNIQUE NOT NULL,
+ expires TIMESTAMP NOT NULL
+ );
+ \`);
+ await pool.end();
 })();
 "
 ```
@@ -212,7 +212,7 @@ npm run dev
 
 ---
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### First Time Setup
 1. Navigate to [http://localhost:3000](http://localhost:3000)
@@ -251,25 +251,25 @@ npm run dev
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 quantumlab/
-├── app/                    # Next.js 14 App Router
-│   ├── auth/              # Login/signup pages
-│   ├── cloud/             # Cloud training UI
-│   ├── compute/           # System monitoring
-│   ├── inference/         # Molecule generation
-│   └── library/           # Molecule database
-├── backend/               # FastAPI Python backend
-│   ├── inference_server.py
-│   ├── system_detect.py
-│   └── vault.py
-├── components/            # Reusable React components
-├── lib/                   # Utilities
-│   ├── auth.ts           # NextAuth config
-│   └── db.ts             # PostgreSQL client
-└── public/               # Static assets
+ app/ # Next.js 14 App Router
+ auth/ # Login/signup pages
+ cloud/ # Cloud training UI
+ compute/ # System monitoring
+ inference/ # Molecule generation
+ library/ # Molecule database
+ backend/ # FastAPI Python backend
+ inference_server.py
+ system_detect.py
+ vault.py
+ components/ # Reusable React components
+ lib/ # Utilities
+ auth.ts # NextAuth config
+ db.ts # PostgreSQL client
+ public/ # Static assets
 ```
 
 ### Tech Stack
@@ -282,7 +282,7 @@ quantumlab/
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -305,13 +305,13 @@ VAULT_MASTER_KEY=generate_with_openssl_rand_base64_32
 
 Generate secrets:
 ```bash
-openssl rand -base64 32  # For NEXTAUTH_SECRET
-openssl rand -base64 32  # For VAULT_MASTER_KEY
+openssl rand -base64 32 # For NEXTAUTH_SECRET
+openssl rand -base64 32 # For VAULT_MASTER_KEY
 ```
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Port Already in Use
 ```bash
@@ -357,7 +357,7 @@ sudo -u postgres psql quantumlab -c "DROP TABLE IF EXISTS sessions, users CASCAD
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 - **Architecture**: See [docs/architecture/OVERVIEW.md](docs/architecture/OVERVIEW.md)
 - **Theory**: See [docs/theory/STIEFEL_MANIFOLD_THEORY.md](docs/theory/STIEFEL_MANIFOLD_THEORY.md)
@@ -366,7 +366,7 @@ sudo -u postgres psql quantumlab -c "DROP TABLE IF EXISTS sessions, users CASCAD
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions welcome! Please:
 1. Fork the repository
@@ -377,13 +377,13 @@ Contributions welcome! Please:
 
 ---
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **QCMD-ECS Framework**: Quantum Chemical Molecular Design with Equivariant Consistency Sampling
 - **SchNetPack**: Deep learning for quantum chemistry
@@ -392,11 +392,11 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-## 📧 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/Koussaisalem/algo/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/Koussaisalem/algo/discussions)
 
 ---
 
-**Made with ❤️ for quantum chemistry research**
+**Made with for quantum chemistry research**

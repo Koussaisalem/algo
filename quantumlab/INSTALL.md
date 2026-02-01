@@ -1,6 +1,6 @@
 # Installation Guide
 
-## 🚀 Fastest Method (Recommended)
+## Fastest Method (Recommended)
 
 ```bash
 git clone https://github.com/Koussaisalem/algo.git
@@ -14,7 +14,7 @@ chmod +x setup.sh
 
 ---
 
-## 🐳 Docker Method
+## Docker Method
 
 ```bash
 git clone https://github.com/Koussaisalem/algo.git
@@ -27,7 +27,7 @@ Services start automatically on ports 3000, 8000, 5432.
 
 ---
 
-## ⚙️ What the Setup Does
+## What the Setup Does
 
 1. **Dependency Check**: Verifies Node.js, Python, PostgreSQL
 2. **Secret Generation**: Creates secure random keys
@@ -38,7 +38,7 @@ Services start automatically on ports 3000, 8000, 5432.
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 - Node.js 20+
 - Python 3.12+
@@ -48,13 +48,13 @@ Services start automatically on ports 3000, 8000, 5432.
 
 ---
 
-## 🛠 Manual Installation
+## Manual Installation
 
 See [QUICKSTART.md](QUICKSTART.md) for detailed step-by-step instructions.
 
 ---
 
-## ❓ Issues?
+## Issues?
 
 ```bash
 # Kill stuck processes

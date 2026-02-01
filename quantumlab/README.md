@@ -1,4 +1,4 @@
-# QuantumLab 🔬✨
+# QuantumLab 
 
 > **End-to-end platform for quantum materials discovery combining generative AI, quantum chemistry, and intuitive visualization**
 
@@ -9,23 +9,23 @@
 
 ---
 
-## 🌟 Overview
+## Overview
 
 **QuantumLab** is a professional-grade web platform that makes quantum materials discovery accessible to researchers worldwide. Built with Apple-style design principles and powered by the proven QCMD-ECS framework, it provides an intuitive interface for the complete discovery pipeline.
 
 ### Key Features
 
-- 🎨 **Apple-Style Glassmorphism UI** - Beautiful, modern interface with liquid glass effects
-- 📊 **Custom Dataset Management** - Upload, organize, and visualize molecular datasets
-- 🧠 **AI Model Training** - Configure and train custom generative models
-- ⚡ **DFT Computations** - Run xTB or full DFT validations
-- 📈 **Real-time Monitoring** - Track computation progress with live updates
-- 🔬 **3D Visualization** - Interactive molecular structure viewer
-- 📥 **Export & Share** - Download results and share discoveries
+- **Apple-Style Glassmorphism UI** - Beautiful, modern interface with liquid glass effects
+- **Custom Dataset Management** - Upload, organize, and visualize molecular datasets
+- **AI Model Training** - Configure and train custom generative models
+- **DFT Computations** - Run xTB or full DFT validations
+- **Real-time Monitoring** - Track computation progress with live updates
+- **3D Visualization** - Interactive molecular structure viewer
+- **Export & Share** - Download results and share discoveries
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -70,39 +70,39 @@ NEXTAUTH_URL="http://localhost:3000"
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 quantumlab/
-├── app/                      # Next.js App Router
-│   ├── (auth)/              # Authentication pages
-│   ├── dashboard/           # Main dashboard
-│   ├── datasets/            # Dataset management
-│   ├── models/              # Model training
-│   ├── compute/             # DFT computations
-│   ├── results/             # Results & visualizations
-│   ├── layout.tsx           # Root layout
-│   ├── page.tsx             # Landing page
-│   └── globals.css          # Global styles
-├── components/
-│   ├── ui/                  # shadcn/ui components
-│   ├── dashboard/           # Dashboard components
-│   ├── datasets/            # Dataset components
-│   ├── models/              # Model components
-│   ├── compute/             # Computation components
-│   └── visualizations/      # 3D viewers, charts
-├── lib/
-│   ├── api/                 # API client functions
-│   ├── utils.ts             # Utility functions
-│   └── types.ts             # TypeScript types
-├── hooks/                   # Custom React hooks
-├── public/                  # Static assets
-└── styles/                  # Additional styles
+ app/ # Next.js App Router
+ (auth)/ # Authentication pages
+ dashboard/ # Main dashboard
+ datasets/ # Dataset management
+ models/ # Model training
+ compute/ # DFT computations
+ results/ # Results & visualizations
+ layout.tsx # Root layout
+ page.tsx # Landing page
+ globals.css # Global styles
+ components/
+ ui/ # shadcn/ui components
+ dashboard/ # Dashboard components
+ datasets/ # Dataset components
+ models/ # Model components
+ compute/ # Computation components
+ visualizations/ # 3D viewers, charts
+ lib/
+ api/ # API client functions
+ utils.ts # Utility functions
+ types.ts # TypeScript types
+ hooks/ # Custom React hooks
+ public/ # Static assets
+ styles/ # Additional styles
 ```
 
 ---
 
-## 🎨 Design System
+## Design System
 
 ### Color Palette
 
@@ -130,7 +130,7 @@ Built with shadcn/ui and custom Apple-style variants:
 
 ---
 
-## 🔧 Core Features
+## Core Features
 
 ### 1. Dataset Management
 
@@ -144,15 +144,15 @@ Built with shadcn/ui and custom Apple-style variants:
 ```typescript
 // Upload dataset
 const uploadDataset = async (file: File) => {
-  const formData = new FormData()
-  formData.append('file', file)
-  
-  const response = await fetch('/api/datasets/upload', {
-    method: 'POST',
-    body: formData
-  })
-  
-  return response.json()
+ const formData = new FormData()
+ formData.append('file', file)
+ 
+ const response = await fetch('/api/datasets/upload', {
+ method: 'POST',
+ body: formData
+ })
+ 
+ return response.json()
 }
 ```
 
@@ -187,7 +187,7 @@ const uploadDataset = async (file: File) => {
 
 ---
 
-## 🔌 API Integration
+## API Integration
 
 ### Python Backend Communication
 
@@ -196,16 +196,16 @@ const uploadDataset = async (file: File) => {
 import axios from 'axios'
 
 const pythonAPI = axios.create({
-  baseURL: process.env.PYTHON_API_URL,
-  timeout: 30000,
+ baseURL: process.env.PYTHON_API_URL,
+ timeout: 30000,
 })
 
 export const runDFT = async (moleculeId: string, method: 'xtb' | 'dft') => {
-  const response = await pythonAPI.post('/compute/dft', {
-    molecule_id: moleculeId,
-    method: method,
-  })
-  return response.data
+ const response = await pythonAPI.post('/compute/dft', {
+ molecule_id: moleculeId,
+ method: method,
+ })
+ return response.data
 }
 ```
 
@@ -220,46 +220,46 @@ export const runDFT = async (moleculeId: string, method: 'xtb' | 'dft') => {
 
 ---
 
-## 🎯 Workflows
+## Workflows
 
 ### Complete Discovery Pipeline
 
 1. **Upload Dataset**
-   ```typescript
-   const dataset = await uploadDataset(file)
-   ```
+ ```typescript
+ const dataset = await uploadDataset(file)
+ ```
 
 2. **Train Model**
-   ```typescript
-   const model = await trainModel({
-     datasetId: dataset.id,
-     modelType: 'score',
-     epochs: 100
-   })
-   ```
+ ```typescript
+ const model = await trainModel({
+ datasetId: dataset.id,
+ modelType: 'score',
+ epochs: 100
+ })
+ ```
 
 3. **Generate Molecules**
-   ```typescript
-   const generated = await generateMolecules({
-     modelId: model.id,
-     numSamples: 100
-   })
-   ```
+ ```typescript
+ const generated = await generateMolecules({
+ modelId: model.id,
+ numSamples: 100
+ })
+ ```
 
 4. **Validate with DFT**
-   ```typescript
-   const results = await runDFT(generated[0].id, 'xtb')
-   ```
+ ```typescript
+ const results = await runDFT(generated[0].id, 'xtb')
+ ```
 
 5. **Visualize & Export**
-   ```typescript
-   visualizeMolecule(results.structure)
-   exportResults(results, 'json')
-   ```
+ ```typescript
+ visualizeMolecule(results.structure)
+ exportResults(results, 'json')
+ ```
 
 ---
 
-## 🧪 Development
+## Development
 
 ### Local Development
 
@@ -300,25 +300,25 @@ npx shadcn-ui@latest add dialog
 import { useState, useEffect } from 'react'
 
 export function useDataset(id: string) {
-  const [dataset, setDataset] = useState(null)
-  const [loading, setLoading] = useState(true)
+ const [dataset, setDataset] = useState(null)
+ const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetch(`/api/datasets/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setDataset(data)
-        setLoading(false)
-      })
-  }, [id])
+ useEffect(() => {
+ fetch(`/api/datasets/${id}`)
+ .then(res => res.json())
+ .then(data => {
+ setDataset(data)
+ setLoading(false)
+ })
+ }, [id])
 
-  return { dataset, loading }
+ return { dataset, loading }
 }
 ```
 
 ---
 
-## 📊 Performance
+## Performance
 
 - **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
 - **First Contentful Paint**: < 1.5s
@@ -327,7 +327,7 @@ export function useDataset(id: string) {
 
 ---
 
-## 🔒 Security
+## Security
 
 - **Authentication**: NextAuth.js with multiple providers
 - **Authorization**: Role-based access control (RBAC)
@@ -337,7 +337,7 @@ export function useDataset(id: string) {
 
 ---
 
-## 🚢 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 
@@ -379,7 +379,7 @@ NEXTAUTH_URL=
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions from the community!
 
@@ -391,7 +391,7 @@ We welcome contributions from the community!
 
 ---
 
-## 📖 Documentation
+## Documentation
 
 - [User Guide](./docs/USER_GUIDE.md)
 - [API Reference](./docs/API.md)
@@ -400,7 +400,7 @@ We welcome contributions from the community!
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -426,13 +426,13 @@ npm run dev
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built with [Next.js](https://nextjs.org/)
 - UI components from [shadcn/ui](https://ui.shadcn.com/)
@@ -442,7 +442,7 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 
 ---
 
-## 📧 Contact
+## Contact
 
 For questions, issues, or collaboration:
 - **GitHub Issues**: [Report a bug](https://github.com/Koussaisalem/algo/issues)
@@ -452,8 +452,8 @@ For questions, issues, or collaboration:
 
 <div align="center">
 
-**[⬆ back to top](#quantumlab-)**
+**[ back to top](#quantumlab-)**
 
-Made with ❤️ by the QuantumLab Team
+Made with by the QuantumLab Team
 
 </div>
