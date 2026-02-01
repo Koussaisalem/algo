@@ -9,6 +9,8 @@ interface InferenceRequest {
   numDiffusionSteps?: number
   seed?: number
   elementTypes?: string[]
+  targetBandGap?: number
+  guidanceStrength?: number
 }
 
 export async function POST(request: NextRequest) {
@@ -22,6 +24,8 @@ export async function POST(request: NextRequest) {
       numDiffusionSteps = 100,
       seed,
       elementTypes = ['C', 'N', 'O', 'H'],
+      targetBandGap,
+      guidanceStrength = 1.0,
     } = body
 
     // Validate inputs
@@ -51,6 +55,8 @@ export async function POST(request: NextRequest) {
           num_diffusion_steps: numDiffusionSteps,
           seed,
           element_types: elementTypes,
+          target_band_gap: targetBandGap,
+          guidance_strength: guidanceStrength,
         }),
       })
 

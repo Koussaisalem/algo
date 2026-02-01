@@ -65,6 +65,8 @@ interface GenerationParams {
   numDiffusionSteps: number;
   seed: number | null;
   elementTypes: string[];
+  targetBandGap: number | null;
+  guidanceStrength: number;
 }
 
 // Element colors and data for visualization
@@ -103,6 +105,8 @@ export default function InferencePage() {
     numDiffusionSteps: 100,
     seed: null,
     elementTypes: ['C', 'N', 'O', 'H'],
+    targetBandGap: null,
+    guidanceStrength: 1.0,
   });
 
   // Check backend status on mount
@@ -280,6 +284,74 @@ export default function InferencePage() {
                   onChange={e => setParams(p => ({ ...p, numDiffusionSteps: parseInt(e.target.value) || 100 }))}
                   className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-purple-500/50"
                 />
+              </div>
+            </div>
+            
+            {/* Property Targeting */}
+            <div className="mt-6 p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20">
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="w-4 h-4 text-purple-400" />
+                <h3 className="text-sm font-medium text-purple-300">Property-Guided Generation</h3>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Target Band Gap */}
+                <div>
+                  <label className="block text-sm text-gray-400 mb-2">
+                    Target Band Gap (eV)
+                    <span className="text-xs text-gray-500 ml-2">Optional</span>
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      min={0}
+                      max={10}
+                      step={0.1}
+                      value={params.targetBandGap ?? ''}
+                      onChange={e => setParams(p => ({ 
+                        ...p, 
+                        targetBandGap: e.target.value ? parseFloat(e.target.value) : null 
+                      }))}
+                      placeholder="e.g., 2.5"
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50"
+                    />
+                    {params.targetBandGap !== null && (
+                      <button
+                        onClick={() => setParams(p => ({ ...p, targetBandGap: null }))}
+                        className="px-3 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+                        title="Clear target"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    0 = metal, 1-3 = semiconductor, &gt;3 = insulator
+                  </p>
+                </div>
+                
+                {/* Guidance Strength */}
+                {params.targetBandGap !== null && (
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-2">
+                      Guidance Strength
+                    </label>
+                    <input
+                      type="range"
+                      min={0.1}
+                      max={3.0}
+                      step={0.1}
+                      value={params.guidanceStrength}
+                      onChange={e => setParams(p => ({ ...p, guidanceStrength: parseFloat(e.target.value) }))}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <span>Weak (0.1)</span>
+                      <span className="text-purple-400 font-medium">{params.guidanceStrength.toFixed(1)}</span>
+                      <span>Strong (3.0)</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
@@ -741,6 +813,11 @@ function Molecule3DViewer({ molecule }: { molecule: GeneratedMolecule }) {
           value={`${molecule.properties.band_gap.toFixed(3)} eV`}
           icon={<Box className="w-4 h-4" />}
           color="purple"
+          subtitle={
+            molecule.properties.targeted_gap 
+              ? `Target: ${molecule.properties.targeted_gap.toFixed(1)} eV | Error: ${Math.abs(molecule.properties.band_gap - molecule.properties.targeted_gap).toFixed(3)} eV`
+              : undefined
+          }
         />
         <PropertyCard 
           label="Dipole Moment" 
@@ -776,12 +853,14 @@ function PropertyCard({
   label, 
   value, 
   icon, 
-  color 
+  color,
+  subtitle
 }: { 
   label: string; 
   value: string; 
   icon: React.ReactNode;
   color: string;
+  subtitle?: string;
 }) {
   const colorClasses: Record<string, string> = {
     blue: 'from-blue-500/20 to-blue-600/10 text-blue-400',
@@ -797,6 +876,9 @@ function PropertyCard({
       </div>
       <p className="text-lg font-semibold text-white">{value}</p>
       <p className="text-xs text-gray-500">{label}</p>
+      {subtitle && (
+        <p className="text-[10px] text-gray-600 mt-1">{subtitle}</p>
+      )}
     </div>
   );
 }

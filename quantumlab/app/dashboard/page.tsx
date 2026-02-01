@@ -85,6 +85,7 @@ export default function DashboardPage() {
           <NavItem href="/dashboard" icon={<BarChart3 className="w-4 h-4" />} label="Overview" active />
           <NavItem href="/datasets" icon={<Layers className="w-4 h-4" />} label="Datasets" badge={datasets.length.toString()} />
           <NavItem href="/models" icon={<Cpu className="w-4 h-4" />} label="Models" badge={models.length.toString()} />
+          <NavItem href="/inference" icon={<Wand2 className="w-4 h-4" />} label="Generate" highlight />
           <NavItem href="/compute" icon={<Zap className="w-4 h-4" />} label="Compute" badge={runningJobs > 0 ? `${runningJobs}` : undefined} />
           <NavItem href="/results" icon={<Target className="w-4 h-4" />} label="Results" badge={results.length.toString()} />
         </nav>
@@ -258,22 +259,29 @@ export default function DashboardPage() {
   )
 }
 
-function NavItem({ href, icon, label, active, badge }: { href: string; icon: React.ReactNode; label: string; active?: boolean; badge?: string }) {
+function NavItem({ href, icon, label, active, badge, highlight }: { href: string; icon: React.ReactNode; label: string; active?: boolean; badge?: string; highlight?: boolean }) {
   return (
     <Link href={href}>
       <div className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${
         active 
           ? "bg-white/10 text-white" 
-          : "text-gray-400 hover:text-white hover:bg-white/[0.05]"
+          : highlight
+            ? "text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 bg-purple-500/5"
+            : "text-gray-400 hover:text-white hover:bg-white/[0.05]"
       }`}>
         {icon}
         <span className="text-sm font-medium">{label}</span>
+        {highlight && !badge && (
+          <span className="ml-auto px-2 py-0.5 rounded-full text-[10px] bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium">
+            NEW
+          </span>
+        )}
         {badge && (
           <span className="ml-auto px-2 py-0.5 rounded-full text-xs bg-white/10 text-neutral-400">
             {badge}
           </span>
         )}
-        {active && !badge && <ChevronRight className="w-3 h-3 ml-auto text-gray-500" />}
+        {active && !badge && !highlight && <ChevronRight className="w-3 h-3 ml-auto text-gray-500" />}
       </div>
     </Link>
   )

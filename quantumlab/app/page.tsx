@@ -73,8 +73,15 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link 
+              href="/inference"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-base font-medium hover:opacity-90 transition-all btn-shine"
+            >
+              <Sparkles className="w-4 h-4" />
+              Generate Molecules
+            </Link>
+            <Link 
               href="/dashboard"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full text-base font-medium hover:bg-gray-100 transition-all btn-shine"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full text-base font-medium hover:bg-gray-100 transition-all"
             >
               Open Dashboard
               <ArrowRight className="w-4 h-4" />
