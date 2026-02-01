@@ -3,7 +3,7 @@
 # Core tensor + GNN stack
 torch==2.5.1
 torch-geometric==2.6.1
-nequip==0.15.0
+nequip==0.16.2
 
 # Chemistry + numerical tooling
 rdkit==2025.3.6
