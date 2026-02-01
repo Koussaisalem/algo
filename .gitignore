@@ -206,3 +206,27 @@ temp/
 coverage.xml
 htmlcov/
 !requirements-dev.txt
+
+# Security and secrets
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Security reports
+bandit-report.json
+pip-audit.json
+safety-report.json
+npm-audit.json
+trivy-results.sarif
+security-scan-*.json
+
+# Vault database
+vault.db
+*.enc
