@@ -22,9 +22,9 @@ sys.path.insert(0, str(PROJECT_ROOT / "core"))
 sys.path.insert(0, str(PROJECT_ROOT / "core/qcmd_ecs"))
 sys.path.insert(0, str(PROJECT_ROOT / "projects/phononic-discovery/framework"))
 
-from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse, JSONResponse
 from pydantic import BaseModel
 import uvicorn
 
@@ -32,6 +32,11 @@ import uvicorn
 from database import db
 from vault import vault
 from system_detect import get_system_specs, get_recommendations
+
+# Import security middleware
+from rate_limiter import RateLimitMiddleware, RateLimiter
+from security_headers import SecurityHeadersMiddleware
+from input_validation import InputValidator
 
 # Try to import the actual models
 try:
@@ -58,7 +63,13 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Enable CORS for Next.js frontend
+# Add security headers middleware (first, so it applies to all responses)
+app.add_middleware(SecurityHeadersMiddleware)
+
+# Add rate limiting middleware (create instance with limiter)
+app.add_middleware(RateLimitMiddleware)
+
+# Enable CORS for Next.js frontend (after security middleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
@@ -539,6 +550,21 @@ async def generate_molecules(request: GenerationRequest):
     import time
     start_time = time.time()
     
+    # Validate input parameters
+    if request.num_samples < 1 or request.num_samples > 100:
+        raise HTTPException(status_code=400, detail="num_samples must be between 1 and 100")
+    
+    if request.num_atoms < 2 or request.num_atoms > 200:
+        raise HTTPException(status_code=400, detail="num_atoms must be between 2 and 200")
+    
+    if request.temperature < 0.1 or request.temperature > 10.0:
+        raise HTTPException(status_code=400, detail="temperature must be between 0.1 and 10.0")
+    
+    # Validate element types
+    for elem in request.element_types:
+        if not InputValidator.sanitize_string(elem, allow_alphanumeric=True):
+            raise HTTPException(status_code=400, detail=f"Invalid element type: {elem}")
+    
     try:
         molecules = []
         base_seed = request.seed or int(time.time())
@@ -616,6 +642,16 @@ class DatasetAddRequest(BaseModel):
 @app.post("/library/save")
 async def save_molecule_to_library(request: SaveMoleculeRequest):
     """Save a molecule to the library."""
+    # Validate input
+    if request.tags:
+        for tag in request.tags:
+            if not InputValidator.sanitize_string(tag, max_length=50):
+                raise HTTPException(status_code=400, detail=f"Invalid tag: {tag}")
+    
+    if request.notes:
+        if not InputValidator.sanitize_string(request.notes, max_length=1000):
+            raise HTTPException(status_code=400, detail="Invalid notes content")
+    
     try:
         molecule_id = db.save_molecule(request.molecule_data, request.metadata)
         
