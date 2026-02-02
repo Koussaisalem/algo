@@ -1,0 +1,129 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: quantumlab-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-quantumlab}
+      POSTGRES_USER: ${POSTGRES_USER:-quantumlab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-quantumlab_secure_password}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-quantumlab} -d ${POSTGRES_DB:-quantumlab}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - quantumlab-network
+
+  # Backend API (FastAPI)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: quantumlab-backend
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    environment:
+      # Database
+      DATABASE_URL: postgresql://${POSTGRES_USER:-quantumlab}:${POSTGRES_PASSWORD:-quantumlab_secure_password}@postgres:5432/${POSTGRES_DB:-quantumlab}
+      # Security
+      JWT_SECRET: ${JWT_SECRET:-change_this_in_production}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost}
+      # Application
+      PYTHONUNBUFFERED: 1
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    volumes:
+      - ./data/models:/app/data/models:ro
+      - backend_data:/app/data/db
+      - backend_logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - quantumlab-network
+
+  # Frontend (Next.js)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: quantumlab-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      # NextAuth.js
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-change_this_in_production_min_32_chars}
+      # Database
+      DATABASE_URL: postgresql://${POSTGRES_USER:-quantumlab}:${POSTGRES_PASSWORD:-quantumlab_secure_password}@postgres:5432/${POSTGRES_DB:-quantumlab}
+      # Backend API
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      BACKEND_URL: ${BACKEND_URL:-http://backend:8000}
+      # Node
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - quantumlab-network
+
+  # Optional: Redis for caching (future use)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: quantumlab-redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - quantumlab-network
+
+volumes:
+  postgres_data:
+    driver: local
+  backend_data:
+    driver: local
+  backend_logs:
+    driver: local
+  # redis_data:
+  #   driver: local
+
+networks:
+  quantumlab-network:
+    driver: bridge

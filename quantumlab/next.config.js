@@ -3,8 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost'],
+    domains: ["localhost"],
   },
-}
+  // Enable standalone output for Docker
+  output: "standalone",
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
